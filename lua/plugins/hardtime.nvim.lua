@@ -7,5 +7,9 @@ return {
     dependencies = {
         "MunifTanjim/nui.nvim"
     },
-    opts = {}
+    opts = {
+        disabled_filetypes = {
+            ["codecompanion"] = true,
+        },
+    }
 }

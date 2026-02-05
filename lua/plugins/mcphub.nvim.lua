@@ -3,21 +3,110 @@
 
 return {
   "ravitemer/mcphub.nvim",
-  event = "VeryLazy",
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  opts = {
-    port = 37373,
-    config = vim.fn.expand("~/.config/mcphub/servers.json"),
-    log_level = vim.log.levels.WARN,
-    extensions = {
-      copilotchat = {
-        enabled = true,
-        convert_tools_to_functions = true, -- Convert MCP tools to CopilotChat functions
-        convert_resources_to_functions = true, -- Convert MCP resources to CopilotChat functions
-        add_mcp_prefix = false, -- Add "mcp_" prefix to function names
+  build = "npm install -g mcp-hub@latest", -- Installs `mcp-hub` node binary globally
+  config = function()
+    local env_keys = {
+      "CLAUDE_CODE_OAUTH_TOKEN",
+      "ANTHROPIC_API_KEY",
+      "OPENAI_API_KEY",
+      "OPENROUTER_API_KEY",
+      "GITHUB_PERSONAL_ACCESS_TOKEN",
+      "DATABASE_URL",
+      "DBUI_URL",
+      "E2B_API_KEY",
+    }
+
+    local function collect_env(keys)
+      local env = {}
+      for _, key in ipairs(keys) do
+        local value = vim.env[key]
+        if value and value ~= "" then
+          env[key] = value
+        end
+      end
+      return env
+    end
+
+
+    require("mcphub").setup({
+      --- `mcp-hub` binary related options-------------------
+      config = vim.fn.expand("~/.config/.mcp.json"), -- Absolute path to MCP Servers config file (will create if not exists)
+      port = 37373, -- The port `mcp-hub` server listens to
+      shutdown_delay = 5 * 60 * 1000, -- Delay in ms before shutting down the server when last instance closes (default: 5 minutes)
+      use_bundled_binary = false, -- Use local `mcp-hub` binary (set this to true when using build = "bundled_build.lua")
+      mcp_request_timeout = 60000, --Max time allowed for a MCP tool or resource to execute in milliseconds, set longer for long running tasks
+      global_env = collect_env(env_keys), -- Prefer env-driven secrets; only pass through values that are set
+      workspace = {
+        enabled = true, -- Enable project-local configuration files
+        look_for = { ".mcphub/servers.json", ".vscode/mcp.json", ".cursor/mcp.json" }, -- Files to look for when detecting project boundaries (VS Code format supported)
+        reload_on_dir_changed = true, -- Automatically switch hubs on DirChanged event
+        port_range = { min = 40000, max = 41000 }, -- Port range for generating unique workspace ports
+        get_port = nil, -- Optional function returning custom port number. Called when generating ports to allow custom port assignment logic
       },
-    },
-  },
+
+      ---Chat-plugin related options-----------------
+      auto_approve = true, -- Auto approve mcp tool calls
+      auto_toggle_mcp_servers = true, -- Let LLMs start and stop MCP servers automatically
+      extensions = {
+        avante = {
+          make_slash_commands = true, -- make /slash commands from MCP server prompts
+        },
+      },
+
+      --- Plugin specific options-------------------
+      native_servers = {}, -- add your custom lua native servers here
+      builtin_tools = {
+        edit_file = {
+          parser = {
+            track_issues = true,
+            extract_inline_content = true,
+          },
+          locator = {
+            fuzzy_threshold = 0.8,
+            enable_fuzzy_matching = true,
+          },
+          ui = {
+            go_to_origin_on_complete = true,
+            keybindings = {
+              accept = ".",
+              reject = ",",
+              next = "n",
+              prev = "p",
+              accept_all = "ga",
+              reject_all = "gr",
+            },
+          },
+        },
+      },
+      ui = {
+        window = {
+          width = 0.8, -- 0-1 (ratio); "50%" (percentage); 50 (raw number)
+          height = 0.8, -- 0-1 (ratio); "50%" (percentage); 50 (raw number)
+          align = "center", -- "center", "top-left", "top-right", "bottom-left", "bottom-right", "top", "bottom", "left", "right"
+          relative = "editor",
+          zindex = 50,
+          border = "rounded", -- "none", "single", "double", "rounded", "solid", "shadow"
+        },
+        wo = { -- window-scoped options (vim.wo)
+          winhl = "Normal:MCPHubNormal,FloatBorder:MCPHubBorder",
+        },
+      },
+      json_decode = nil, -- Custom JSON parser function (e.g., require('json5').parse for JSON5 support)
+      on_ready = function(hub)
+        -- Called when hub is ready
+      end,
+      on_error = function(err)
+        -- Called on errors
+      end,
+      log = {
+        level = vim.log.levels.WARN,
+        to_file = false,
+        file_path = nil,
+        prefix = "MCPHub",
+      },
+    })
+  end,
 }

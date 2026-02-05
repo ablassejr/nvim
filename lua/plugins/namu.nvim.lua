@@ -1,32 +1,16 @@
 -- Plugin: bassamsdata/namu.nvim
--- Installed via store.nvim
+-- LSP symbol navigation (replaces LazyVim's default <leader>ss Goto Symbol)
 
 return {
-    "bassamsdata/namu.nvim",
-    opts = {
-        global = {},
-        namu_symbols = {
-            -- Specific Module options
-            options = {}
-        }
+  "bassamsdata/namu.nvim",
+  opts = {
+    global = {},
+    namu_symbols = {
+      options = {},
     },
-    -- === Suggested Keymaps: ===
-    vim.keymap.set(
-        "n",
-        "<leader>ss",
-        ":Namu symbols<cr>",
-        {
-            desc = "Jump to LSP symbol",
-            silent = true
-        }
-    ),
-    vim.keymap.set(
-        "n",
-        "<leader>sw",
-        ":Namu workspace<cr>",
-        {
-            desc = "LSP Symbols - Workspace",
-            silent = true
-        }
-    )
+  },
+  keys = {
+    { "<leader>ss", "<cmd>Namu symbols<cr>", desc = "Jump to LSP symbol", silent = true },
+    { "<leader>sS", "<cmd>Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
+  },
 }

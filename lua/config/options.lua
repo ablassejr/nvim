@@ -6,7 +6,7 @@ local env = vim.env
 
 -- Plugin settings
 vim.g.snacks_animate = false -- Disable snacks.nvim animations
-
+vim.g.codecompanion_auto_tool_mode = true
 -- Editor settings
 opt.colorcolumn = "80" -- Set color column at 80 characters
 opt.termguicolors = true -- Enable 24-bit RGB colors
@@ -16,3 +16,15 @@ opt.shortmess:append({ W = true, I = true, c = true, C = true })
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.ruler = false -- Disable the default ruler
 opt.clipboard = env.SSH_CONNECTION and "" or "unnamedplus"
+
+-- Whitespace indicators: use minimal characters to avoid superseding
+-- inline virtual text (Copilot ghost text, Sidekick NES, blink.cmp).
+-- Neovim's list mode characters take rendering priority over extmark
+-- virt_text_pos="inline", so we keep trail/eol/extends invisible.
+opt.listchars = {
+  tab = "» ",
+  trail = " ",
+  nbsp = "␣",
+  extends = "…",
+  precedes = "…",
+}

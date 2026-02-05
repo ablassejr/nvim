@@ -35,7 +35,7 @@ return {
       enabled = true,
     },
     explorer = {
-      enabled = true,
+      enabled = false, -- replaced by neo-tree.nvim
     },
     indent = {
       enabled = true,

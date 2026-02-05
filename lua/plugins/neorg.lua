@@ -10,6 +10,12 @@ return {
     "3rd/image.nvim",
   },
   config = function()
+    -- Ensure @neorg.rendered.latex has an explicit fg color.
+    -- The slate colorscheme's Normal group lacks an fg attribute (relies on terminal default),
+    -- which causes neorg's compute_foreground() to crash with: format(nil) at module.lua:87
+    local normal_fg = vim.api.nvim_get_hl(0, { name = "Normal", link = false }).fg
+    vim.api.nvim_set_hl(0, "@neorg.rendered.latex", { fg = normal_fg or 0xc8c8c8 })
+
     require("neorg").setup({
       load = {
         ["core.defaults"] = {},

@@ -7,14 +7,14 @@ return {
   lazy = true,
   keys = {
     {
-      "<leader>p",
+      "<leader>Lp",
       function()
         require("nabla").popup({ border = "rounded" })
       end,
       desc = "Nabla: preview LaTeX equation",
     },
     {
-      "<leader>P",
+      "<leader>Lv",
       function()
         require("nabla").toggle_virt({ autogen = true, silent = true })
       end,

@@ -1,0 +1,234 @@
+# JavaScript snippets for vim-snipmate
+
+# ── Functions ──────────────────────────────────────
+
+snippet fn "function declaration"
+	function ${1:name}(${2}) {
+		${0}
+	}
+snippet afn "arrow function"
+	const ${1:name} = (${2}) => {
+		${0}
+	};
+snippet af "arrow function (inline)"
+	(${1}) => ${0}
+snippet iife "immediately invoked function"
+	(() => {
+		${0}
+	})();
+snippet asfn "async function"
+	async function ${1:name}(${2}) {
+		${0}
+	}
+snippet asafn "async arrow function"
+	const ${1:name} = async (${2}) => {
+		${0}
+	};
+
+# ── Classes ────────────────────────────────────────
+
+snippet cls "class definition"
+	class ${1:Name} {
+		constructor(${2}) {
+			${0}
+		}
+	}
+snippet clse "class extends"
+	class ${1:Name} extends ${2:Base} {
+		constructor(${3}) {
+			super(${4});
+			${0}
+		}
+	}
+snippet meth "method"
+	${1:name}(${2}) {
+		${0}
+	}
+snippet get "getter"
+	get ${1:name}() {
+		return this._${1};
+	}
+snippet set "setter"
+	set ${1:name}(${2:value}) {
+		this._${1} = ${2};
+	}
+
+# ── Control flow ───────────────────────────────────
+
+snippet if "if statement"
+	if (${1:cond}) {
+		${0}
+	}
+snippet ife "if/else"
+	if (${1:cond}) {
+		${2}
+	} else {
+		${0}
+	}
+snippet tern "ternary"
+	${1:cond} ? ${2:then} : ${0:else}
+snippet for "for loop"
+	for (let ${1:i} = 0; ${1} < ${2:n}; ${1}++) {
+		${0}
+	}
+snippet forof "for...of"
+	for (const ${1:item} of ${2:iterable}) {
+		${0}
+	}
+snippet forin "for...in"
+	for (const ${1:key} in ${2:obj}) {
+		${0}
+	}
+snippet fore "forEach"
+	${1:arr}.forEach((${2:item}) => {
+		${0}
+	});
+snippet whl "while loop"
+	while (${1:cond}) {
+		${0}
+	}
+snippet sw "switch statement"
+	switch (${1:expr}) {
+		case ${2:val}:
+			${0}
+			break;
+		default:
+			break;
+	}
+snippet try "try/catch"
+	try {
+		${1}
+	} catch (${2:err}) {
+		${0}
+	}
+snippet tryf "try/catch/finally"
+	try {
+		${1}
+	} catch (${2:err}) {
+		${3}
+	} finally {
+		${0}
+	}
+
+# ── Variables / Destructuring ─────────────────────
+
+snippet cl "const let"
+	const ${1:name} = ${0};
+snippet lt "let"
+	let ${1:name} = ${0};
+snippet dest "destructure object"
+	const { ${1} } = ${0};
+snippet desta "destructure array"
+	const [${1}] = ${0};
+
+# ── Promises / Async ──────────────────────────────
+
+snippet prom "new Promise"
+	new Promise((resolve, reject) => {
+		${0}
+	})
+snippet then "then chain"
+	.then((${1:res}) => {
+		${0}
+	})
+snippet catch "catch chain"
+	.catch((${1:err}) => {
+		${0}
+	})
+snippet aw "await"
+	const ${1:res} = await ${0};
+snippet trycatch "async try/catch pattern"
+	try {
+		const ${1:res} = await ${2};
+		${0}
+	} catch (err) {
+		console.error(err);
+	}
+
+# ── Output / Debug ─────────────────────────────────
+
+snippet cl "console.log"
+	console.log(${0});
+snippet ce "console.error"
+	console.error(${0});
+snippet cw "console.warn"
+	console.warn(${0});
+snippet ct "console.table"
+	console.table(${0});
+snippet cd "console.dir"
+	console.dir(${0});
+
+# ── Array methods ──────────────────────────────────
+
+snippet map "map"
+	${1:arr}.map((${2:item}) => ${0})
+snippet filter "filter"
+	${1:arr}.filter((${2:item}) => ${0})
+snippet reduce "reduce"
+	${1:arr}.reduce((${2:acc}, ${3:item}) => {
+		${0}
+		return ${2};
+	}, ${4:initial})
+snippet find "find"
+	${1:arr}.find((${2:item}) => ${0})
+snippet some "some"
+	${1:arr}.some((${2:item}) => ${0})
+snippet every "every"
+	${1:arr}.every((${2:item}) => ${0})
+
+# ── Modules ────────────────────────────────────────
+
+snippet imp "import"
+	import ${1:module} from '${0:module}';
+snippet impd "import destructured"
+	import { ${1} } from '${0:module}';
+snippet exp "export default"
+	export default ${0};
+snippet expn "export named"
+	export const ${1:name} = ${0};
+snippet expf "export function"
+	export function ${1:name}(${2}) {
+		${0}
+	}
+snippet req "require"
+	const ${1:module} = require('${0:module}');
+
+# ── Testing ────────────────────────────────────────
+
+snippet desc "describe block"
+	describe('${1:description}', () => {
+		${0}
+	});
+snippet it "it block"
+	it('${1:should}', () => {
+		${0}
+	});
+snippet ita "async it block"
+	it('${1:should}', async () => {
+		${0}
+	});
+snippet bfe "beforeEach"
+	beforeEach(() => {
+		${0}
+	});
+snippet aft "afterEach"
+	afterEach(() => {
+		${0}
+	});
+
+# ── Misc ───────────────────────────────────────────
+
+snippet ret "return"
+	return ${0};
+snippet timeout "setTimeout"
+	setTimeout(() => {
+		${0}
+	}, ${1:1000});
+snippet interval "setInterval"
+	setInterval(() => {
+		${0}
+	}, ${1:1000});
+snippet todo "TODO comment"
+	// TODO: ${0}
+snippet fixme "FIXME comment"
+	// FIXME: ${0}

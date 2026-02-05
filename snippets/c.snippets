@@ -1,0 +1,162 @@
+# C snippets for vim-snipmate
+
+# ── Preprocessor ───────────────────────────────────
+
+snippet inc "include angle brackets"
+	#include <${0:stdio.h}>
+snippet incs "include quotes"
+	#include "${0:header.h}"
+snippet def "define macro"
+	#define ${1:NAME} ${0:value}
+snippet guard "header guard"
+	#ifndef ${1:HEADER}_H
+	#define ${1}_H
+
+	${0}
+
+	#endif /* ${1}_H */
+snippet pragma "pragma once"
+	#pragma once
+
+	${0}
+snippet ifdef "ifdef block"
+	#ifdef ${1:MACRO}
+	${0}
+	#endif /* ${1} */
+snippet ifndef "ifndef block"
+	#ifndef ${1:MACRO}
+	${0}
+	#endif /* ${1} */
+
+# ── Functions ──────────────────────────────────────
+
+snippet fn "function definition"
+	${1:void} ${2:name}(${3:void}) {
+		${0}
+	}
+snippet main "main function"
+	int main(int argc, char *argv[]) {
+		${0}
+		return 0;
+	}
+snippet maini "simple main"
+	int main(void) {
+		${0}
+		return 0;
+	}
+
+# ── Structs / Typedefs ────────────────────────────
+
+snippet struct "struct definition"
+	struct ${1:name} {
+		${0}
+	};
+snippet td "typedef struct"
+	typedef struct {
+		${0}
+	} ${1:Name};
+snippet tde "typedef enum"
+	typedef enum {
+		${0}
+	} ${1:Name};
+snippet enum "enum definition"
+	enum ${1:name} {
+		${0}
+	};
+snippet union "union definition"
+	union ${1:name} {
+		${0}
+	};
+
+# ── Control flow ───────────────────────────────────
+
+snippet if "if statement"
+	if (${1:cond}) {
+		${0}
+	}
+snippet ife "if/else"
+	if (${1:cond}) {
+		${2}
+	} else {
+		${0}
+	}
+snippet for "for loop"
+	for (int ${1:i} = 0; ${1} < ${2:n}; ${1}++) {
+		${0}
+	}
+snippet whl "while loop"
+	while (${1:cond}) {
+		${0}
+	}
+snippet do "do-while loop"
+	do {
+		${0}
+	} while (${1:cond});
+snippet sw "switch statement"
+	switch (${1:expr}) {
+	case ${2:val}:
+		${0}
+		break;
+	default:
+		break;
+	}
+
+# ── Output / Input ────────────────────────────────
+
+snippet pr "printf"
+	printf("${1:%s}\n"${2:, ${0}});
+snippet prd "printf int"
+	printf("${1:var}: %d\n", ${0:var});
+snippet prf "printf float"
+	printf("${1:var}: %.2f\n", ${0:var});
+snippet scan "scanf"
+	scanf("${1:%d}", &${0:var});
+snippet fputs "fputs stderr"
+	fputs("${0:msg}\n", stderr);
+snippet fpr "fprintf stderr"
+	fprintf(stderr, "${1:%s}\n"${2:, ${0}});
+
+# ── Memory ─────────────────────────────────────────
+
+snippet mal "malloc"
+	${1:int} *${2:p} = malloc(${3:n} * sizeof(${1}));
+	if (!${2}) {
+		${0:perror("malloc"); return -1;}
+	}
+snippet cal "calloc"
+	${1:int} *${2:p} = calloc(${3:n}, sizeof(${1}));
+	if (!${2}) {
+		${0:perror("calloc"); return -1;}
+	}
+snippet real "realloc"
+	${1:p} = realloc(${1}, ${2:new_size} * sizeof(*${1}));
+snippet free "free"
+	free(${1:p});
+	${1} = NULL;
+	${0}
+
+# ── File I/O ───────────────────────────────────────
+
+snippet fopen "fopen"
+	FILE *${1:fp} = fopen("${2:file}", "${3:r}");
+	if (!${1}) {
+		perror("fopen");
+		${0:return -1;}
+	}
+snippet fclose "fclose"
+	fclose(${0:fp});
+
+# ── Misc ───────────────────────────────────────────
+
+snippet ret "return"
+	return ${0};
+snippet null "NULL check"
+	if (${1:ptr} == NULL) {
+		${0}
+	}
+snippet todo "TODO comment"
+	/* TODO: ${0} */
+snippet fixme "FIXME comment"
+	/* FIXME: ${0} */
+snippet assert "assert"
+	assert(${0:expr});

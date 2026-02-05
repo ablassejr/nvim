@@ -7,7 +7,7 @@ return {
     "mikavilpas/blink-ripgrep.nvim", -- Ripgrep search integration
     -- Database completion (loaded for SQL filetypes)
     { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
-    { "olimorris/codecompanion.nvim" },
+    -- codecompanion.nvim configured in its own file; blink source registered below
   },
 
   -- use a release tag to download pre-built binaries
@@ -20,19 +20,17 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
-    -- 'super-tab' for mappings similar to vscode (tab to accept)
-    -- 'enter' for enter to accept
-    -- 'none' for no mappings
-    --
-    -- All presets have the following mappings:
-    -- C-space: Open menu or open docs if already open
-    -- C-n/C-p or Up/Down: Select next/previous item
-    -- C-e: Hide menu
-    -- C-k: Toggle signature help (if signature.enabled = true)
-    --
+    -- Use default snippet engine (native vim.snippet, no LuaSnip dependency)
+    snippets = { preset = "default" },
+
     -- See :h blink-cmp-config-keymap for defining your own keymap
-    keymap = { preset = "default" },
+    -- Base: 'default' preset (C-n/C-p nav, C-e hide, C-k signature)
+    keymap = {
+      preset = "default",
+
+      -- All other keys use the "default" preset behavior.
+      -- LazyVim's blink extra auto-injects ai_accept (Copilot native) into <Tab>.
+    },
 
     appearance = {
       -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
@@ -40,14 +38,24 @@ return {
       nerd_font_variant = "mono",
     },
 
-    -- (Default) Only show the documentation popup when manually triggered
-    completion = { documentation = { auto_show = true } },
+    completion = {
+      documentation = { auto_show = true },
+      ghost_text = { enabled = false },
+    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = { "copilot", "lsp", "path", "snippets", "ripgrep", "dadbod" },
+      per_filetype = {
+        codecompanion = { "codecompanion" },
+      },
       providers = {
+        codecompanion = {
+          name = "CodeCompanion",
+          module = "codecompanion.providers.completion.blink",
+          enabled = true,
+        },
         lsp = {
           name = "LSP",
           module = "blink.cmp.sources.lsp",
@@ -94,5 +102,14 @@ return {
       -- fuzzy = { implementation = "prefer_rust_with_warning" },
     },
     -- opts_extend = { "sources.default" },
+
+    -- Cmdline mode: disable completion in search (/ and ?) but keep it for commands (:)
+    cmdline = {
+      sources = function()
+        local type = vim.fn.getcmdtype()
+        if type == "/" or type == "?" then return {} end
+        return { "cmdline", "buffer" }
+      end,
+    },
   },
 }

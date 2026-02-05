@@ -46,7 +46,7 @@ return {
           esc = true,
         },
         diff = {
-          inline = "words",
+          inline = "lines",
         },
       },
       cli = {
@@ -104,7 +104,7 @@ return {
   -- stylua: ignore
   keys = {
     {
-      "<leader>sn",
+      "<leader>kn",
       function()
         if not require("sidekick").nes_jump_or_apply() then
           vim.notify("No next edit suggestion", vim.log.levels.INFO)
@@ -112,11 +112,21 @@ return {
       end,
       desc = "Sidekick next edit",
     },
-    { "<leader>sc", function() require("sidekick.cli").toggle() end, desc = "Sidekick CLI toggle", mode = { "n", "v" } },
-    { "<leader>st", function() require("sidekick.cli").select() end, desc = "Sidekick select tool" },
-    { "<leader>ss", function() require("sidekick.cli").send({ selection = true }) end, desc = "Sidekick send selection", mode = "v" },
-    { "<leader>sp", function() require("sidekick.cli").prompt() end, desc = "Sidekick prompts", mode = { "n", "v" } },
-    { "<leader>sf", function() require("sidekick.cli").focus() end, desc = "Sidekick focus", mode = { "n", "v" } },
-    { "<leader>sa", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Claude toggle", mode = { "n", "v" } },
+    {
+      "<C-]>",
+      function()
+        if not require("sidekick").nes_jump_or_apply() then
+          vim.notify("No next edit suggestion", vim.log.levels.INFO)
+        end
+      end,
+      desc = "Accept NES suggestion",
+      mode = { "n" },
+    },
+    { "<leader>kc", function() require("sidekick.cli").toggle() end, desc = "Sidekick CLI toggle", mode = { "n", "v" } },
+    { "<leader>kt", function() require("sidekick.cli").select() end, desc = "Sidekick select tool" },
+    { "<leader>ks", function() require("sidekick.cli").send({ selection = true }) end, desc = "Sidekick send selection", mode = "v" },
+    { "<leader>kp", function() require("sidekick.cli").prompt() end, desc = "Sidekick prompts", mode = { "n", "v" } },
+    { "<leader>kf", function() require("sidekick.cli").focus() end, desc = "Sidekick focus", mode = { "n", "v" } },
+    { "<leader>ka", function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end, desc = "Sidekick Claude toggle", mode = { "n", "v" } },
   },
 }
