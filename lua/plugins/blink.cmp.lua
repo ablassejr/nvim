@@ -5,6 +5,7 @@ return {
     "rafamadriz/friendly-snippets",
     -- blink.cmp extension plugins
     "mikavilpas/blink-ripgrep.nvim", -- Ripgrep search integration
+    "Kaiser-Yang/blink-cmp-git", -- Git completions (issues, PRs, users, commits)
     -- Database completion (loaded for SQL filetypes)
     { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
     -- codecompanion.nvim configured in its own file; blink source registered below
@@ -46,7 +47,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "copilot", "lsp", "path", "snippets", "ripgrep", "dadbod" },
+      default = { "copilot", "lsp", "path", "snippets", "buffer", "ripgrep", "dadbod", "git" },
       per_filetype = {
         codecompanion = { "codecompanion" },
       },
@@ -71,6 +72,25 @@ return {
           score_offset = 100, -- Prioritize copilot suggestions
           async = true,
         },
+        -- Buffer source (built-in) — completes words from all open buffers
+        buffer = {
+          name = "Buffer",
+          module = "blink.cmp.sources.buffer",
+          enabled = true,
+          score_offset = 700, -- Just under snippets (750)
+          opts = {
+            -- Complete from all open buffers, not just the current one
+            get_bufnrs = vim.api.nvim_list_bufs,
+          },
+          -- Filter out plain dictionary words (short common English words)
+          transform_items = function(_, items)
+            return vim.tbl_filter(function(item)
+              return item.insertText:find("[A-Z_]") -- keep camelCase, snake_case, PascalCase
+                or #item.insertText > 6 -- keep longer identifiers
+                or item.insertText:match("^%u") -- keep capitalized words (types, classes)
+              end, items)
+          end,
+        },
         -- Ripgrep source configuration
         ripgrep = {
           module = "blink-ripgrep",
@@ -90,7 +110,14 @@ return {
           module = "blink.cmp.sources.snippets",
           kind = "Snippet",
           enabled = true,
-          score_offset = 750,
+          score_offset = 1100,
+        },
+        -- Git source — issues (#), PRs, users (@), commit types (:)
+        git = {
+          name = "Git",
+          module = "blink-cmp-git",
+          enabled = true,
+          score_offset = 50,
         },
       },
 
