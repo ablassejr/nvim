@@ -7,6 +7,12 @@ return {
     keys = {
       { "s", "<Plug>(leap)", mode = { "n", "x", "o" }, desc = "Leap" },
       { "S", "<Plug>(leap-from-window)", mode = { "n" }, desc = "Leap from Window" },
+      -- f/F/t/T must be listed here so lazy.nvim loads the plugin on first press;
+      -- the actual leap-powered mappings are created in config() below
+      { "f", mode = { "n", "x", "o" }, desc = "Leap f" },
+      { "F", mode = { "n", "x", "o" }, desc = "Leap F" },
+      { "t", mode = { "n", "x", "o" }, desc = "Leap t" },
+      { "T", mode = { "n", "x", "o" }, desc = "Leap T" },
     },
     config = function(_, opts)
       local leap = require("leap")
@@ -26,7 +32,7 @@ return {
           inclusive = true,
           opts = {
             labels = "", -- force autojump to first match
-            safe_labels = vim.fn.mode(1):match("[no]") and "" or nil, -- labels only in visual mode
+            -- safe_labels left as default → labels shown on 2nd+ targets in all modes
           },
         }
         return vim.tbl_deep_extend("keep", common_args, key_specific_args)
