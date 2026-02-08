@@ -3,8 +3,10 @@ return {
   version = "2.*",
   config = function()
     require("window-picker").setup({
-      -- Window picker hint characters (shown above each window)
-      hint = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+      -- Type of hint display (statusline-winbar, floating-big-letter, or floating-letter)
+      hint = "statusline-winbar",
+      -- Characters used for window selection (home row optimized)
+      selection_chars = "FJDKSLA;CMRUEIWOQP",
       -- Filter for windows to consider
       filter_rules = {
         autoignore_current = true,
@@ -19,7 +21,7 @@ return {
   end,
   keys = {
     {
-      "<leader>w",
+      "<leader>wp",
       function()
         local picked_window_id = require("window-picker").pick_window()
         if picked_window_id then
