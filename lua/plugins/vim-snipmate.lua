@@ -10,12 +10,15 @@ return {
       "MarcWeber/vim-addon-mw-utils",
     },
     event = "InsertEnter",
-    config = function()
+    -- init runs BEFORE the plugin loads, so g:snipMate is set before
+    -- plugin/snipMate.vim reads it and adds its own keys (get_snippets, etc.)
+    init = function()
       vim.g.snippets_dir = vim.fn.stdpath("config") .. "/snippets"
       vim.g.snipMate = {
         snippet_version = 1,
       }
-
+    end,
+    config = function()
       -- Tab: expand snippet or jump to next placeholder
       vim.keymap.set("i", "<Tab>", "<Plug>snipMateNextOrTrigger", { noremap = false })
       vim.keymap.set("s", "<Tab>", "<Plug>snipMateNextOrTrigger", { noremap = false })
