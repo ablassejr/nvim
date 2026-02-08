@@ -1,9 +1,20 @@
 -- Plugin: 3rd/image.nvim
 -- Renders inline images in Neovim via Kitty graphics protocol.
 -- Required by Neorg's core.latex.renderer module.
+--
+-- NOTE: Uses `cond` to skip loading in headless mode. image.nvim calls
+-- ioctl(TIOCGWINSZ) at require-time which crashes when stdout isn't a tty.
 
 return {
   "3rd/image.nvim",
+  cond = function()
+    -- image.nvim needs a real terminal (kitty graphics protocol).
+    -- In headless mode stdout is not a tty → ioctl crashes.
+    local ffi_ok, ffi = pcall(require, "ffi")
+    if not ffi_ok then return false end
+    pcall(ffi.cdef, "int isatty(int fd);") -- safe if already defined
+    return ffi.C.isatty(1) == 1
+  end,
   build = false, -- don't build the magick rock; we use magick_cli
   opts = {
     backend = "kitty",
