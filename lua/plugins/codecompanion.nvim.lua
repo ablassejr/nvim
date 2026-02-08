@@ -20,7 +20,7 @@ return {
       chat = {
         adapter = {
           name = "copilot",
-          model = "gpt-5.1-codex-max",
+          model = "Claude Opus 4.6",
         },
         roles = {
           llm = function(adapter)
@@ -61,15 +61,61 @@ return {
               },
             },
           },
-          -- Safety: require approval before running commands
+          -- Risk tiers for tool approvals:
+          --   Low  (auto-approve): read-only tools — no side effects
+          --   Med  (confirm after): file mutations — diff shown before accept
+          --   High (confirm before): shell exec, deletion — require explicit approval
+          --
+          -- LOW RISK: auto-approve read-only tools
+          read_file = {
+            opts = {
+              require_approval_before = false,
+              require_cmd_approval = false,
+            },
+          },
+          file_search = {
+            opts = {
+              require_approval_before = false,
+              require_cmd_approval = false,
+            },
+          },
+          grep_search = {
+            opts = {
+              require_approval_before = false,
+              require_cmd_approval = false,
+            },
+          },
+          -- MEDIUM RISK: file mutations — skip pre-approval, confirm via diff
+          insert_edit_into_file = {
+            opts = {
+              require_approval_before = false,
+              require_confirmation_after = true,
+            },
+          },
+          create_file = {
+            opts = {
+              require_approval_before = false,
+              require_cmd_approval = false,
+            },
+          },
+          memory = {
+            opts = {
+              require_approval_before = false,
+            },
+          },
+          -- HIGH RISK: locked down — require approval before execution
           cmd_runner = {
             opts = {
               require_approval_before = true,
+              require_cmd_approval = true,
+              allowed_in_yolo_mode = false,
             },
           },
-          insert_edit_into_file = {
+          delete_file = {
             opts = {
-              require_confirmation_after = true,
+              require_approval_before = true,
+              require_cmd_approval = true,
+              allowed_in_yolo_mode = false,
             },
           },
           opts = {
@@ -124,6 +170,15 @@ return {
           make_vars = true,
           make_slash_commands = true,
           show_result_in_chat = true,
+        },
+      },
+    },
+    handlers = {
+      chat = {
+        handlers = {
+          submit = {
+            strategy = "agents",
+          },
         },
       },
     },
