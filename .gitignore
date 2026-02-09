@@ -7,3 +7,5 @@ foo.*
 *.log
 data
 .worktrees
+.DS_Store
+**/.DS_Store
