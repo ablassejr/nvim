@@ -303,4 +303,114 @@ std::transform({}.begin(), {}.end(), {}.begin(), [](const auto& {}) {{
     i(3, "item"),
     i(0, "transformed"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- DOCUMENTATION (Doxygen)
+  -- ══════════════════════════════════════════════════
+
+  -- Doxygen function comment
+  s("doc", fmt([[
+/**
+ * @brief {}
+ * @param {} {}
+ * @return {}
+ */
+]], {
+    i(1, "Function description"),
+    i(2, "paramName"),
+    i(3, "Parameter description"),
+    i(0, "Return value description"),
+  })),
+
+  -- Doxygen class comment
+  s("docclass", fmt([[
+/**
+ * @class {}
+ * @brief {}
+ */
+]], {
+    i(1, "ClassName"),
+    i(0, "Class description"),
+  })),
+
+  -- TODO comment
+  s("todo", fmt([[
+// TODO: {}
+]], {
+    i(0, "Description"),
+  })),
+
+  -- ══════════════════════════════════════════════════
+  -- BEST PRACTICES
+  -- ══════════════════════════════════════════════════
+
+  -- RAII wrapper class
+  s("raii", fmt([[
+class {} {{
+public:
+    explicit {}({}* resource) : resource_(resource) {{}}
+    ~{}() {{ delete resource_; }}
+
+    // Delete copy
+    {}(const {}&) = delete;
+    {}& operator=(const {}&) = delete;
+
+    // Allow move
+    {}({}&&) noexcept = default;
+    {}& operator=({}&&) noexcept = default;
+
+    {}* get() {{ return resource_; }}
+
+private:
+    {}* resource_;
+}};
+]], {
+    i(1, "ResourceWrapper"),
+    rep(1),
+    i(2, "Resource"),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(1),
+    rep(2),
+    rep(2),
+  })),
+
+  -- Main function
+  s("main", fmt([[
+int main(int argc, char* argv[]) {{
+    {}
+    return 0;
+}}
+]], {
+    i(0, "// program logic"),
+  })),
+
+  -- Try-catch
+  s("try", fmt([[
+try {{
+    {}
+}} catch (const {}& e) {{
+    {}
+}}
+]], {
+    i(1, "// code"),
+    i(2, "std::exception"),
+    i(0, "std::cerr << e.what() << '\\n';"),
+  })),
+
+  -- Enum class
+  s("enum", fmt([[
+enum class {} {{
+    {}
+}};
+]], {
+    i(1, "EnumName"),
+    i(0, "Value1, Value2"),
+  })),
 }
