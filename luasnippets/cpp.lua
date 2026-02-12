@@ -151,4 +151,156 @@ if ({}) {{
     i(2, "// if body"),
     i(0, "// else body"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- MODERN C++ (C++17/20/23)
+  -- ══════════════════════════════════════════════════
+
+  -- Unique pointer
+  s("uptr", fmt([[
+auto {} = std::make_unique<{}>({}); ]], {
+    i(1, "ptr"),
+    i(2, "Type"),
+    i(0, ""),
+  })),
+
+  -- Shared pointer
+  s("sptr", fmt([[
+auto {} = std::make_shared<{}>({}); ]], {
+    i(1, "ptr"),
+    i(2, "Type"),
+    i(0, ""),
+  })),
+
+  -- Lambda
+  s("lam", fmt([[
+[{}]({}){} {{
+    {}
+}}
+]], {
+    i(1, "="),
+    i(2, ""),
+    c(3, {
+      t(""),
+      t(" -> auto"),
+      sn(nil, { t(" -> "), i(1, "Type") }),
+    }),
+    i(0, "// body"),
+  })),
+
+  -- Auto variable
+  s("auto", fmt([[
+auto {} = {};
+]], {
+    i(1, "var"),
+    i(0, "value"),
+  })),
+
+  -- Constexpr function
+  s("constexpr", fmt([[
+constexpr {} {}({}) {{
+    return {};
+}}
+]], {
+    i(1, "auto"),
+    i(2, "functionName"),
+    i(3, ""),
+    i(0, "value"),
+  })),
+
+  -- Structured binding
+  s("bind", fmt([[
+auto [{}, {}] = {};
+]], {
+    i(1, "first"),
+    i(2, "second"),
+    i(0, "pair"),
+  })),
+
+  -- Template function
+  s("tem", fmt([[
+template <typename {}>
+{} {}({}) {{
+    {}
+}}
+]], {
+    i(1, "T"),
+    i(2, "auto"),
+    i(3, "functionName"),
+    i(4, "T value"),
+    i(0, "return value;"),
+  })),
+
+  -- ══════════════════════════════════════════════════
+  -- STL CONTAINERS & ALGORITHMS
+  -- ══════════════════════════════════════════════════
+
+  -- Vector
+  s("vec", fmt([[
+std::vector<{}> {};
+]], {
+    i(1, "int"),
+    i(0, "vec"),
+  })),
+
+  -- Map
+  s("map", fmt([[
+std::map<{}, {}> {};
+]], {
+    i(1, "Key"),
+    i(2, "Value"),
+    i(0, "map"),
+  })),
+
+  -- Unordered map
+  s("umap", fmt([[
+std::unordered_map<{}, {}> {};
+]], {
+    i(1, "Key"),
+    i(2, "Value"),
+    i(0, "map"),
+  })),
+
+  -- String
+  s("str", fmt([[
+std::string {} = "{}";
+]], {
+    i(1, "str"),
+    i(0, ""),
+  })),
+
+  -- Pair
+  s("pair", fmt([[
+std::pair<{}, {}> {};
+]], {
+    i(1, "First"),
+    i(2, "Second"),
+    i(0, "pair"),
+  })),
+
+  -- Algorithm for_each
+  s("foreach", fmt([[
+std::for_each({}.begin(), {}.end(), []({}& {}) {{
+    {}
+}});
+]], {
+    i(1, "container"),
+    rep(1),
+    i(2, "auto"),
+    i(3, "item"),
+    i(0, "// process item"),
+  })),
+
+  -- Algorithm transform
+  s("transform", fmt([[
+std::transform({}.begin(), {}.end(), {}.begin(), [](const auto& {}) {{
+    return {};
+}});
+]], {
+    i(1, "input"),
+    rep(1),
+    i(2, "output"),
+    i(3, "item"),
+    i(0, "transformed"),
+  })),
 }
