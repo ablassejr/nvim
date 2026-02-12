@@ -191,4 +191,109 @@ function use{}({}) {{
     i(3, "// hook logic"),
     i(0, "value"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- EXPRESS / NODE.JS
+  -- ══════════════════════════════════════════════════
+
+  -- Express route
+  s("route", fmt([[
+router.{}('{}', async (req, res{}) => {{
+  try {{
+    {}
+    res.json({{ {} }})
+  }} catch (error) {{
+    {}
+  }}
+}})
+]], {
+    c(1, {
+      t("get"),
+      t("post"),
+      t("put"),
+      t("delete"),
+      t("patch"),
+    }),
+    i(2, "/path"),
+    c(3, {
+      t(""),
+      t(", next"),
+    }),
+    i(4, "// logic"),
+    i(5, "data"),
+    i(0, "next(error)"),
+  })),
+
+  -- Express middleware
+  s("middleware", fmt([[
+const {} = ({}) => (req, res, next) => {{
+  try {{
+    {}
+    next()
+  }} catch (error) {{
+    next(error)
+  }}
+}}
+]], {
+    i(1, "middlewareName"),
+    i(2, ""),
+    i(0, "// middleware logic"),
+  })),
+
+  -- Express error handler
+  s("errorh", fmt([[
+app.use((err, req, res, next) => {{
+  console.error(err.stack)
+  res.status({}).json({{
+    error: {{
+      message: err.message,
+      {}
+    }}
+  }})
+}})
+]], {
+    i(1, "500"),
+    i(0, "// additional error info"),
+  })),
+
+  -- ══════════════════════════════════════════════════
+  -- TESTING (Jest/Vitest)
+  -- ══════════════════════════════════════════════════
+
+  -- Describe block
+  s("desc", fmt([[
+describe('{}', () => {{
+  {}
+}})
+]], {
+    i(1, "test suite"),
+    i(0, "// tests"),
+  })),
+
+  -- Test case
+  s("test", fmt([[
+{}('{}', {}() => {{
+  {}
+}})
+]], {
+    c(1, {
+      t("test"),
+      t("it"),
+    }),
+    i(2, "should do something"),
+    c(3, {
+      t(""),
+      t("async "),
+    }),
+    i(0, "expect(result).toBe(expected)"),
+  })),
+
+  -- Mock function
+  s("mock", fmt([[
+const {} = jest.fn(({}) => {})
+]], {
+    i(1, "mockFn"),
+    i(2, ""),
+    i(0, "returnValue"),
+  })),
 }
