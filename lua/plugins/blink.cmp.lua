@@ -21,8 +21,21 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- Use default snippet engine (native vim.snippet, no LuaSnip dependency)
-    snippets = { preset = "default" },
+    -- Use LuaSnip as snippet engine
+    snippets = {
+      expand = function(snippet)
+        require("luasnip").lsp_expand(snippet)
+      end,
+      active = function(filter)
+        if filter and filter.direction then
+          return require("luasnip").jumpable(filter.direction)
+        end
+        return require("luasnip").in_snippet()
+      end,
+      jump = function(direction)
+        require("luasnip").jump(direction)
+      end,
+    },
 
     -- See :h blink-cmp-config-keymap for defining your own keymap
     -- Base: 'default' preset (C-n/C-p nav, C-e hide, C-k signature)
@@ -50,6 +63,9 @@ return {
       default = { "copilot", "lsp", "path", "snippets", "buffer", "ripgrep", "dadbod", "git" },
       per_filetype = {
         codecompanion = { "codecompanion" },
+        -- Input boxes: only LSP completions
+        snacks_picker_input = { "lsp" },
+        snacks_input = { "lsp" },
       },
       providers = {
         codecompanion = {
@@ -62,7 +78,24 @@ return {
           module = "blink.cmp.sources.lsp",
           enabled = true,
           kind = "LSP",
-          score_offset = 1000,
+          score_offset = 1200,
+          transform_items = function(_, items)
+            return vim.tbl_filter(function(item)
+              if item.kind == 15 then
+                if item.insertText and type(item.insertText) == "string" then
+                  if item.insertText:match("%${%d+/") then
+                    return false
+                  end
+                end
+                if item.textEdit and item.textEdit.newText then
+                  if item.textEdit.newText:match("%${%d+/") then
+                    return false
+                  end
+                end
+              end
+              return true
+            end, items)
+          end,
         },
 
         -- Copilot source configuration

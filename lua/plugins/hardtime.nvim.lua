@@ -2,14 +2,15 @@
 -- Installed via store.nvim
 
 return {
-    "m4xshen/hardtime.nvim",
-    lazy = false,
-    dependencies = {
-        "MunifTanjim/nui.nvim"
+  "m4xshen/hardtime.nvim",
+  lazy = false,
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
+  opts = {
+    disabled_filetypes = {
+      ["codecompanion"] = true,
     },
-    opts = {
-        disabled_filetypes = {
-            ["codecompanion"] = true,
-        },
-    }
+    enabled = false,
+  },
 }

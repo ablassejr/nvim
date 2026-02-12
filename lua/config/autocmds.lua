@@ -7,6 +7,13 @@
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
 
+-- Workaround: Neovim nightly (v0.12.0-dev) _folding_range.lua:235 uses
+-- assert(vim.lsp.get_client_by_id(...)) inside an LspNotify callback.
+-- The client can be detached before the callback fires (race condition),
+-- causing "Error in LspNotify Autocommands".
+-- Override: lua/vim/lsp/_folding_range.lua shadows the runtime copy with
+-- a nil-guard on line 235. Remove once upstream patches this.
+
 -- Fix: Snacks.nvim prompt buffers break backspace for the first character.
 -- Root cause: buftype=prompt + vim.bo.modified=false on TextChangedI makes
 -- Neovim treat freshly typed text as pre-existing (neovim/neovim#14116).

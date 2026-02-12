@@ -269,6 +269,11 @@ return {
         files = { vim.fn.stdpath("config") .. "/rules/tasks/research.md" },
         parser = "codecompanion",
       },
+      teacher = {
+        description = "Teaching mode (concept-first, Socratic, step-by-step)",
+        files = { vim.fn.stdpath("config") .. "/rules/tasks/teacher.md" },
+        parser = "codecompanion",
+      },
       -- Architecture rules
       design = {
         description = "Design brainstorming methodology",

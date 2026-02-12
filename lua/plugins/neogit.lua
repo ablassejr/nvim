@@ -21,5 +21,26 @@ return {
       desc = "Neogit",
     },
   },
+  disable_hint = true,
+  disable_signs = false,
+  disable_context_highlighting = false,
+  prompt_force_push = true,
+  disable_insert_on_commit = "auto",
+  filewatcher = {
+    enabled = true,
+    interval = 1000,
+  },
+  commit_view = {
+    kind = "vsplit",
+  },
+  log_view = {
+    kind = "tab",
+  },
+  remember_settings = true,
+  use_per_project_settings = true,
+  highlight = {
+    italic = true,
+    bold = true,
+    underline = true,
+  },
 }
-

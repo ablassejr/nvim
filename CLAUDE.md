@@ -41,9 +41,21 @@ Custom plugins default to `lazy = false` (eager). LazyVim plugins are lazy-loade
 
 Each `.lua` file returns a lazy.nvim plugin table and is auto-discovered. Files are kebab-cased and named after the plugin (e.g., `blink.cmp.lua`, `sidekick.nvim.lua`).
 
-### Snippet System (`snippets/`)
+### Snippet System
 
-vim-snipmate-based. Snippet files live in `snippets/<filetype>.snippets` using UltiSnips-compatible format (snippet_version=1). Tab expands/jumps forward, Shift-Tab jumps backward. Community snippets from `honza/vim-snippets` are also available. Languages with custom snippets: Python, C++, C, JavaScript, Bash/Shell.
+**LuaSnip-based** with two snippet formats:
+
+1. **Snipmate format** (`snippets/<filetype>.snippets`): Legacy snippets still work, loaded automatically. Simple tabstop syntax: `${1:placeholder}`, `${0}` for final position.
+
+2. **Lua format** (`luasnippets/<filetype>.lua`): Advanced features including:
+   - **Choice nodes**: Cycle options with `Ctrl-L`/`Ctrl-H`
+   - **Function nodes**: Dynamic content (dates, filenames, transforms)
+   - **Dynamic nodes**: Conditional structure based on input
+   - **Format strings**: Clean syntax via `fmt()` helper
+
+**Keybindings**: Tab (expand/jump forward), Shift-Tab (jump back), Ctrl-L (next choice), Ctrl-H (previous choice)
+
+**Custom snippets**: Languages with custom snippets: Python, C++, C, JavaScript, Bash/Shell. See `luasnippets/README.md` for creating advanced snippets.
 
 ### Credential Management (`lua/config/auth.lua`)
 

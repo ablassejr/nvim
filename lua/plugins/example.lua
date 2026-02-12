@@ -115,6 +115,15 @@ return {
         "vim",
         "yaml",
       },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection    = "<CR>",    -- Start selection incrementally
+          node_incremental  = "<CR>",    -- Grow selection to next larger node
+          node_decremental  = "<BS>",    -- Shrink back down the tree
+          scope_incremental = "grc",     -- Jump to next broader scope (optional)
+        },
+      },
     },
   },
 
