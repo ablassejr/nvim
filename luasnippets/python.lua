@@ -62,4 +62,63 @@ class {}({}):
     i(4, ""),
     i(0, "pass"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- FASTAPI
+  -- ══════════════════════════════════════════════════
+
+  -- FastAPI route with HTTP method choice
+  s("route", fmt([[
+@router.{}("{}")
+async def {}({}):
+    """{}"""
+    {}
+]], {
+    c(1, {
+      t("get"),
+      t("post"),
+      t("put"),
+      t("delete"),
+      t("patch"),
+    }),
+    i(2, "/path"),
+    i(3, "endpoint_name"),
+    i(4, ""),
+    i(5, "Endpoint description"),
+    i(0, "return {}"),
+  })),
+
+  -- Pydantic model
+  s("pydantic", fmt([[
+class {}(BaseModel):
+    """{}"""
+    {}: {}
+
+    @field_validator("{}")
+    @classmethod
+    def validate_{}(cls, v):
+        {}
+        return v
+]], {
+    i(1, "ModelName"),
+    i(2, "Model description"),
+    i(3, "field_name"),
+    i(4, "str"),
+    rep(3),
+    rep(3),
+    i(0, "# validation logic"),
+  })),
+
+  -- FastAPI dependency
+  s("depend", fmt([[
+async def {}({}) -> {}:
+    """{}"""
+    {}
+]], {
+    i(1, "get_dependency"),
+    i(2, ""),
+    i(3, "Any"),
+    i(4, "Dependency description"),
+    i(0, "return value"),
+  })),
 }
