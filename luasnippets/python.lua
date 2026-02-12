@@ -121,4 +121,85 @@ async def {}({}) -> {}:
     i(4, "Dependency description"),
     i(0, "return value"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- TESTING (pytest)
+  -- ══════════════════════════════════════════════════
+
+  -- Pytest parametrize
+  s("param", fmt([[
+@pytest.mark.parametrize("{}", [
+    {},
+])
+def test_{}({}):
+    {}
+]], {
+    i(1, "arg1, arg2, expected"),
+    i(2, "(1, 2, 3),"),
+    i(3, "function_name"),
+    rep(1),
+    i(0, "assert result == expected"),
+  })),
+
+  -- Pytest fixture
+  s("fixture", fmt([[
+@pytest.fixture
+def {}({}):
+    """{}"""
+    {}
+]], {
+    i(1, "fixture_name"),
+    i(2, ""),
+    i(3, "Fixture description"),
+    i(0, "return value"),
+  })),
+
+  -- Async test
+  s("atest", fmt([[
+@pytest.mark.asyncio
+async def test_{}({}):
+    """{}"""
+    {}
+]], {
+    i(1, "async_function"),
+    i(2, ""),
+    i(3, "Test description"),
+    i(0, "assert True"),
+  })),
+
+  -- ══════════════════════════════════════════════════
+  -- TYPE HINTS
+  -- ══════════════════════════════════════════════════
+
+  -- Type hint with common types
+  s("hint", fmt([[{}: {}]], {
+    i(1, "variable"),
+    c(2, {
+      t("str"),
+      t("int"),
+      t("float"),
+      t("bool"),
+      t("list[str]"),
+      t("dict[str, Any]"),
+      t("Optional[str]"),
+      sn(nil, { t("list["), i(1, "T"), t("]") }),
+      i(nil, "Any"),
+    }),
+  })),
+
+  -- Protocol definition
+  s("protocol", fmt([[
+class {}(Protocol):
+    """{}"""
+
+    def {}(self, {}) -> {}:
+        {}
+]], {
+    i(1, "ProtocolName"),
+    i(2, "Protocol description"),
+    i(3, "method_name"),
+    i(4, ""),
+    i(5, "None"),
+    i(0, "..."),
+  })),
 }
