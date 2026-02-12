@@ -202,4 +202,77 @@ class {}(Protocol):
     i(5, "None"),
     i(0, "..."),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- DOCUMENTATION
+  -- ══════════════════════════════════════════════════
+
+  -- Google-style docstring
+  s("doc", fmt([[
+"""{}
+
+Args:
+    {}: {}
+
+Returns:
+    {}: {}
+
+Raises:
+    {}: {}
+"""
+]], {
+    i(1, "Function description"),
+    i(2, "param_name"),
+    i(3, "Parameter description"),
+    i(4, "type"),
+    i(5, "Return value description"),
+    i(6, "ExceptionType"),
+    i(0, "Exception description"),
+  })),
+
+  -- Simple docstring
+  s('"""', fmt([["""{}"""]], { i(1, "Description") })),
+
+  -- ══════════════════════════════════════════════════
+  -- ASYNC PATTERNS
+  -- ══════════════════════════════════════════════════
+
+  -- Async context manager
+  s("acm", fmt([[
+async with {}({}) as {}:
+    {}
+]], {
+    i(1, "context_manager"),
+    i(2, ""),
+    i(3, "var"),
+    i(0, "pass"),
+  })),
+
+  -- Async comprehension
+  s("afor", fmt([[
+[{} async for {} in {}]
+]], {
+    i(1, "item"),
+    rep(1),
+    i(0, "async_iterable"),
+  })),
+
+  -- Context manager class
+  s("ctx", fmt([[
+class {}:
+    """{}"""
+
+    def __enter__(self):
+        {}
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        {}
+        return False
+]], {
+    i(1, "ContextManager"),
+    i(2, "Context manager description"),
+    i(3, "# setup"),
+    i(0, "# cleanup"),
+  })),
 }
