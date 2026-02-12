@@ -9,6 +9,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local c = ls.choice_node
 local fmt = require("luasnip.extras.fmt").fmt
+local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 
 return {
@@ -192,10 +193,10 @@ return {
   })),
 
   -- Block
-  s("block", fmt([[
-\begin{{block}}{{{}}
-    {}
-\end{{block}}
+  s("block", fmta([[
+\begin{block}{<>}
+    <>
+\end{block}
 ]], {
     i(1, "Block Title"),
     i(0, "% content"),
