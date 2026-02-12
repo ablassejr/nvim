@@ -296,4 +296,96 @@ const {} = jest.fn(({}) => {})
     i(2, ""),
     i(0, "returnValue"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- DOCUMENTATION (JSDoc)
+  -- ══════════════════════════════════════════════════
+
+  -- JSDoc function comment
+  s("jsdoc", fmt([[
+/**
+ * {}
+ * @param {{{}}} {} - {}
+ * @returns {{{}}} {}
+ */
+]], {
+    i(1, "Function description"),
+    i(2, "string"),
+    i(3, "paramName"),
+    i(4, "Parameter description"),
+    i(5, "void"),
+    i(0, "Return value description"),
+  })),
+
+  -- JSDoc type definition
+  s("typedef", fmt([[
+/**
+ * @typedef {{Object}} {}
+ * @property {{{}}} {} - {}
+ */
+]], {
+    i(1, "TypeName"),
+    i(2, "string"),
+    i(3, "propertyName"),
+    i(0, "Property description"),
+  })),
+
+  -- ══════════════════════════════════════════════════
+  -- MODERN ES6+
+  -- ══════════════════════════════════════════════════
+
+  -- Import statement
+  s("imp", fmt([[
+import {} from '{}'
+]], {
+    c(1, {
+      sn(nil, { t("{ "), i(1, "named"), t(" }") }),
+      i(nil, "Default"),
+      sn(nil, { t("* as "), i(1, "name") }),
+    }),
+    i(0, "module"),
+  })),
+
+  -- Export statement
+  s("exp", fmt([[
+export {}{}
+]], {
+    c(1, {
+      t("default "),
+      t(""),
+      t("const "),
+    }),
+    i(0, "value"),
+  })),
+
+  -- Destructuring assignment
+  s("dest", fmt([[
+const {{ {} }} = {}
+]], {
+    i(1, "prop1, prop2"),
+    i(0, "object"),
+  })),
+
+  -- Template literal
+  s("tpl", fmt([[
+`{}`
+]], {
+    i(0, "${expression}"),
+  })),
+
+  -- Optional chaining
+  s("opt", fmt([[
+{}?.{}
+]], {
+    i(1, "object"),
+    i(0, "property"),
+  })),
+
+  -- Nullish coalescing
+  s("null", fmt([[
+{} ?? {}
+]], {
+    i(1, "value"),
+    i(0, "defaultValue"),
+  })),
 }
