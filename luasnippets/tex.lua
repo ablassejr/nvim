@@ -183,12 +183,11 @@ return {
 
   -- Frame
   s("frame", fmt([[
-\begin{{frame}}{{{}}}{{{}}
+\begin{{frame}}{{{}}}
     {}
 \end{{frame}}
 ]], {
     i(1, "Frame Title"),
-    i(2, ""),
     i(0, "% content"),
   })),
 
