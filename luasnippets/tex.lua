@@ -539,4 +539,57 @@ return {
 
   -- Custom math operator
   s("opr", fmt("\\operatorname{{{}}}", { i(0) })),
+
+  -- ══════════════════════════════════════════════════
+  -- THEOREMS & PROOFS
+  -- ══════════════════════════════════════════════════
+  -- Requires \newtheorem{theorem}{Theorem} etc. in preamble (amsthm)
+
+  s("thm", fmt([[\begin{{theorem}}[{}]
+  \label{{thm:{}}}
+  {}
+\end{{theorem}}
+]], { i(1, "name"), i(2, "label"), i(0) })),
+
+  s("lem", fmt([[\begin{{lemma}}[{}]
+  \label{{lem:{}}}
+  {}
+\end{{lemma}}
+]], { i(1, "name"), i(2, "label"), i(0) })),
+
+  s("prop", fmt([[\begin{{proposition}}[{}]
+  \label{{prop:{}}}
+  {}
+\end{{proposition}}
+]], { i(1, "name"), i(2, "label"), i(0) })),
+
+  s("cor", fmt([[\begin{{corollary}}[{}]
+  \label{{cor:{}}}
+  {}
+\end{{corollary}}
+]], { i(1, "name"), i(2, "label"), i(0) })),
+
+  s("defn", fmt([[\begin{{definition}}[{}]
+  \label{{def:{}}}
+  {}
+\end{{definition}}
+]], { i(1, "name"), i(2, "label"), i(0) })),
+
+  s("rem", fmt([[\begin{{remark}}
+  {}
+\end{{remark}}
+]], { i(0) })),
+
+  s("ex", fmt([[\begin{{example}}
+  {}
+\end{{example}}
+]], { i(0) })),
+
+  s("pf", fmt([[\begin{{proof}}
+  {}
+\end{{proof}}
+]], { i(0) })),
+
+  -- QED symbol (use inside or outside proof env)
+  s("qed", t("\\qed")),
 }
