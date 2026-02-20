@@ -716,4 +716,134 @@ return {
     i(3, "0,0"),
     i(0, "text"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- FIGURES, TABLES & FLOATS — EXTENSIONS
+  -- ══════════════════════════════════════════════════
+
+  -- Subfigure layout (requires subcaption package)
+  s("subfig", fmt([[\begin{{figure}}[{}]
+  \centering
+  \begin{{subfigure}}[b]{{{}\\textwidth}}
+    \centering
+    \includegraphics[width=\\textwidth]{{{}}}
+    \caption{{{}}}
+    \label{{fig:{}}}
+  \end{{subfigure}}
+  \hfill
+  \begin{{subfigure}}[b]{{{}\\textwidth}}
+    \centering
+    \includegraphics[width=\\textwidth]{{{}}}
+    \caption{{{}}}
+    \label{{fig:{}}}
+  \end{{subfigure}}
+  \caption{{{}}}
+  \label{{fig:{}}}
+\end{{figure}}
+]], {
+    i(1, "htbp"),
+    i(2, "0.45"), i(3, "image1"), i(4, "Left caption"), i(5, "left"),
+    i(6, "0.45"), i(7, "image2"), i(8, "Right caption"), i(9, "right"),
+    i(10, "Overall caption"), i(0, "main"),
+  })),
+
+  -- Wrapfigure (requires wrapfig package)
+  s("wrapfig", fmt([[\begin{{wrapfigure}}{{{}}}{{{}\\textwidth}}
+  \centering
+  \includegraphics[width=\\textwidth]{{{}}}
+  \caption{{{}}}
+  \label{{fig:{}}}
+\end{{wrapfigure}}
+]], {
+    c(1, { t("r"), t("l"), t("R"), t("L") }),
+    i(2, "0.4"),
+    i(3, "image"),
+    i(4, "Caption"),
+    i(0, "label"),
+  })),
+
+  -- Longtable (requires longtable + booktabs)
+  s("longtab", fmt([[\begin{{longtable}}{{{}}}
+  \caption{{{}}} \label{{tab:{}}} \\
+  \toprule
+  {} \\
+  \midrule
+  \endfirsthead
+  \multicolumn{{{}}}{{c}}{{\tablename\ \thetable\ -- continued}} \\
+  \toprule
+  {} \\
+  \midrule
+  \endhead
+  \bottomrule
+  \endlastfoot
+  {}
+\end{{longtable}}
+]], {
+    i(1, "l|c|r"),
+    i(2, "Caption"), i(3, "label"),
+    i(4, "Col1 & Col2 & Col3"),
+    i(5, "3"),
+    i(6, "Col1 & Col2 & Col3"),
+    i(0, "data & data & data \\\\"),
+  })),
+
+  -- Booktabs-style table (requires booktabs package)
+  s("booktab", fmt([[\begin{{table}}[{}]
+  \centering
+  \begin{{tabular}}{{{}}}
+    \toprule
+    {} \\
+    \midrule
+    {} \\
+    \bottomrule
+  \end{{tabular}}
+  \caption{{{}}}
+  \label{{tab:{}}}
+\end{{table}}
+]], {
+    i(1, "htbp"),
+    i(2, "lcc"),
+    i(3, "Header1 & Header2 & Header3"),
+    i(4, "Data1 & Data2 & Data3"),
+    i(5, "Caption"),
+    i(0, "label"),
+  })),
+
+  -- Multirow (requires multirow package)
+  s("mrow", fmt("\\multirow{{{}}}{{{}}}{{{}}}", {
+    i(1, "2"),
+    c(2, { t("*"), i(nil, "width") }),
+    i(0, "content"),
+  })),
+
+  -- Multicolumn
+  s("mcol", fmt("\\multicolumn{{{}}}{{{}}}{{{}}}", {
+    i(1, "2"),
+    c(2, { t("c"), t("l"), t("r") }),
+    i(0, "content"),
+  })),
+
+  -- Sidewaysfigure (requires rotating package)
+  s("sideways", fmt([[\begin{{sidewaysfigure}}
+  \centering
+  \includegraphics[width={}\\textheight]{{{}}}
+  \caption{{{}}}
+  \label{{fig:{}}}
+\end{{sidewaysfigure}}
+]], {
+    i(1, "0.8"),
+    i(2, "image"),
+    i(3, "Caption"),
+    i(0, "label"),
+  })),
+
+  -- Minted code block (requires minted package + --shell-escape compile flag)
+  s("minted", fmt([[\begin{{minted}}[linenos, frame=lines, {}]{{{}}}
+{}
+\end{{minted}}
+]], {
+    i(1, "fontsize=\\small"),
+    c(2, { t("python"), t("cpp"), t("bash"), t("latex"), i(nil, "lang") }),
+    i(0, "% code here"),
+  })),
 }
