@@ -592,4 +592,46 @@ return {
 
   -- QED symbol (use inside or outside proof env)
   s("qed", t("\\qed")),
+
+  -- ══════════════════════════════════════════════════
+  -- BEAMER — EXTENSIONS
+  -- ══════════════════════════════════════════════════
+
+  -- Alert text
+  s("alert", fmt("\\alert{{{}}}", { i(0) })),
+
+  -- Overlay specs
+  s("only", fmt("\\only<{}>{{{}}}", { i(1, "1"), i(0) })),
+  s("uncover", fmt("\\uncover<{}>{{{}}}", { i(1, "1-"), i(0) })),
+
+  -- Speaker notes
+  s("nota", fmt("\\note{{{}}}", { i(0) })),
+
+  -- Title page frame
+  s("titleframe", t([[\begin{frame}
+  \titlepage
+\end{frame}]])),
+
+  -- Thank-you / closing frame
+  s("thankframe", fmt([[\begin{{frame}}
+  \centering
+  \Huge {}
+\end{{frame}}
+]], { i(0, "Thank you!") })),
+
+  -- Agenda / outline frame using tableofcontents
+  s("agendaframe", fmt([[\begin{{frame}}{{{}}}
+  \tableofcontents[{}]
+\end{{frame}}
+]], {
+    i(1, "Outline"),
+    c(2, { t(""), t("currentsection"), t("hideallsubsections") }),
+  })),
+
+  -- Theme selection (use Ctrl-L to cycle theme type)
+  s("theme", c(1, {
+    sn(nil, { t("\\usetheme{"), i(1, "Madrid"), t("}") }),
+    sn(nil, { t("\\usecolortheme{"), i(1, "beaver"), t("}") }),
+    sn(nil, { t("\\usefonttheme{"), i(1, "serif"), t("}") }),
+  })),
 }
