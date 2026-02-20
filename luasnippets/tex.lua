@@ -447,4 +447,61 @@ return {
   {}
 \end{{center}}
 ]], { i(0) })),
+
+  -- ══════════════════════════════════════════════════
+  -- MATH — SYMBOLS & OPERATORS
+  -- ══════════════════════════════════════════════════
+
+  -- Limit
+  s("lim", fmt("\\lim_{{{}}} {}", { i(1, "x \\to \\infty"), i(0) })),
+
+  -- Product
+  s("prod", fmt("\\prod_{{{}}}^{{{}}}", {
+    i(1, "i=1"),
+    i(0, "n"),
+  })),
+
+  -- Accents
+  s("vec", fmt("\\vec{{{}}}", { i(0) })),
+  s("hat", fmt("\\hat{{{}}}", { i(0) })),
+  s("bar", fmt("\\bar{{{}}}", { i(0) })),
+  s("tilde", fmt("\\tilde{{{}}}", { i(0) })),
+
+  -- Delimiters
+  s("norm", fmt("\\left\\lVert {} \\right\\rVert", { i(0) })),
+  s("abs", fmt("\\left\\lvert {} \\right\\rvert", { i(0) })),
+  s("set", fmt("\\left\\{{ {} \\right\\}}", { i(0) })),
+
+  -- Square root (optional nth root via choice)
+  s("sqrt", c(1, {
+    sn(nil, { t("\\sqrt{"), i(1), t("}") }),
+    sn(nil, { t("\\sqrt["), i(1, "n"), t("]{"), i(2), t("}") }),
+  })),
+
+  -- Calculus
+  s("partial", fmt("\\partial_{{{}}}", { i(0) })),
+  s("nabla", t("\\nabla")),
+
+  -- Bounds
+  s("inf", fmt("\\inf_{{{}}} {}", { i(1, "x"), i(0) })),
+  s("sup", fmt("\\sup_{{{}}} {}", { i(1, "x"), i(0) })),
+
+  -- Logic
+  s("forall", t("\\forall")),
+  s("exists", t("\\exists")),
+
+  -- Text in math mode
+  s("text", fmt("\\text{{{}}}", { i(0) })),
+
+  -- Cases environment
+  s("cases", fmt([[\begin{{cases}}
+  {} & {} \\
+  {} & {}
+\end{{cases}}
+]], {
+    i(1, "f(x)"),
+    i(2, "\\text{if } x > 0"),
+    i(3, "0"),
+    i(0, "\\text{otherwise}"),
+  })),
 }
