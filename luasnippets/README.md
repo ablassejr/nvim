@@ -158,27 +158,89 @@ Comprehensive LuaSnip snippet collection for Python, JavaScript, C++, and LaTeX.
 
 ## LaTeX Snippets (`tex.lua`)
 
+### Document Structure & Preamble
+| Trigger | Description |
+|---------|-------------|
+| `doc` | Full document skeleton with class, packages, title, body |
+| `pkg` | `\usepackage{}` (choice: with/without options) |
+| `class` | `\documentclass[opts]{class}` with choice nodes |
+| `title` | `\title{}` |
+| `author` | `\author{}` |
+| `date` | `\date{\today}` or custom date |
+| `maketitle` | `\maketitle` |
+| `toc` | `\tableofcontents` |
+| `newcmd` | `\newcommand{\name}[args]{def}` |
+| `renewcmd` | `\renewcommand{\name}[args]{def}` |
+| `newenv` | `\newenvironment{name}{begin}{end}` |
+| `abstract` | abstract environment |
+
 ### Core Structures
 | Trigger | Description |
 |---------|-------------|
-| `beg` | Environment with smart \\item insertion |
-| `item` | List item |
-| `itemd` | Description item |
-| `sec` / `ssec` / `sssec` | Sections |
+| `beg` | Environment with smart `\item` insertion |
+| `item` | `\item` |
+| `itemd` | `\item[label]` |
+| `sec` / `ssec` / `sssec` | Section levels |
 | `lab` / `ref` / `cite` | Labels and references |
+| `par` | `\paragraph{}` |
+| `noind` | `\noindent` |
+| `vsp` / `hsp` | Vertical / horizontal space with choices |
+| `newpage` | `\newpage` |
+| `appendix` | `\appendix` + first section |
+| `minipage` | minipage environment |
+| `center` | center environment |
 
-### Math
+### Math — Symbols & Operators
 | Trigger | Description |
 |---------|-------------|
-| `mm` | Inline math |
-| `dm` | Display math |
-| `eq` | Equation with label |
-| `align` | Align environment |
-| `frac` | Fraction |
-| `sum` | Summation |
-| `int` | Integral |
+| `mm` | Inline math `$...$` |
+| `dm` | Display math `\[...\]` |
+| `lim` | `\lim_{x \to \infty}` |
+| `prod` | `\prod_{i}^{n}` |
+| `vec` | `\vec{}` |
+| `hat` | `\hat{}` |
+| `bar` | `\bar{}` |
+| `tilde` | `\tilde{}` |
+| `norm` | `\left\lVert \right\rVert` |
+| `abs` | `\left\lvert \right\rvert` |
+| `set` | `\left\{ \right\}` |
+| `sqrt` | `\sqrt{}` or `\sqrt[n]{}` |
+| `partial` | `\partial_{}` |
+| `nabla` | `\nabla` |
+| `inf` / `sup` | Infimum / supremum |
+| `forall` / `exists` | Quantifiers |
+| `text` | `\text{}` |
+| `cases` | cases environment |
+
+### Math — Environments
+| Trigger | Description |
+|---------|-------------|
+| `eq` | equation with label |
+| `align` | align environment |
+| `frac` | `\frac{num}{den}` |
+| `sum` | `\sum_{i}^{n}` |
+| `int` | `\int_{a}^{b}` |
 | `mat` | Matrix (pmatrix/bmatrix/etc.) |
-| `gr` | Greek letters |
+| `gr` | Greek letter choice node |
+| `gather` | gather environment |
+| `multline` | multline environment |
+| `binom` | `\binom{n}{k}` |
+| `det` | `\det` |
+| `trace` | `\operatorname{tr}` |
+| `opr` | `\operatorname{}` |
+
+### Theorems & Proofs
+| Trigger | Description |
+|---------|-------------|
+| `thm` | theorem environment with label |
+| `lem` | lemma environment with label |
+| `prop` | proposition environment with label |
+| `cor` | corollary environment with label |
+| `defn` | definition environment with label |
+| `rem` | remark environment |
+| `ex` | example environment |
+| `pf` | proof environment |
+| `qed` | `\qed` |
 
 ### Beamer
 | Trigger | Description |
@@ -186,24 +248,75 @@ Comprehensive LuaSnip snippet collection for Python, JavaScript, C++, and LaTeX.
 | `frame` | Beamer frame |
 | `block` | Beamer block |
 | `cols` | Two-column layout |
-| `pause` | Pause command |
+| `pause` | `\pause` |
+| `alert` | `\alert{}` |
+| `only` / `uncover` | Overlay specs |
+| `nota` | `\note{}` |
+| `titleframe` | Title page frame |
+| `thankframe` | Closing thank-you frame |
+| `agendaframe` | Outline frame with `\tableofcontents` |
+| `theme` | `\usetheme{}` / `\usecolortheme{}` / `\usefonttheme{}` |
 
 ### TikZ
 | Trigger | Description |
 |---------|-------------|
-| `tikz` | TikZ picture environment |
-| `node` | TikZ node |
-| `draw` | TikZ draw path |
-| `fill` | TikZ fill shape |
+| `tikz` | tikzpicture environment |
+| `node` | `\node[...] (name) at (x,y) {text};` |
+| `draw` | `\draw[...] -- ;` |
+| `fill` | `\fill[...] rectangle;` |
+| `arrow` | `\draw[->] -- ;` |
+| `circle` | `\draw circle` |
+| `rect` | `\draw rectangle` |
+| `grid` | `\draw grid` |
+| `clip` | Clip scope |
+| `foreach` | `\foreach \x in {...}` |
+| `scope` | scope environment |
+| `coord` | `\coordinate` |
+| `axis` | pgfplots axis environment |
+| `flowbox` | Flowchart rectangle node |
 
-### Common Packages
+### Figures, Tables & Floats
 | Trigger | Description |
 |---------|-------------|
-| `fig` | Figure with includegraphics |
-| `tab` | Table with tabular |
-| `code` | Listings code block |
-| `href` | Hyperlink |
-| `bibitem` | Bibliography entry |
+| `fig` | figure with includegraphics |
+| `tab` | table with tabular |
+| `code` | listings code block |
+| `subfig` | Two-subfigure layout |
+| `wrapfig` | wrapfigure environment |
+| `longtab` | longtable environment |
+| `booktab` | booktabs-style table |
+| `mrow` | `\multirow{}{}{}` |
+| `mcol` | `\multicolumn{}{}{}` |
+| `sideways` | sidewaysfigure environment |
+| `minted` | minted code block |
+
+### Bibliography & Cross-references
+| Trigger | Description |
+|---------|-------------|
+| `lab` / `ref` / `cite` | Core references |
+| `eqref` | `\eqref{}` |
+| `autoref` | `\autoref{}` |
+| `cref` | `\cref{}` (cleveref) |
+| `citeauthor` / `citeyear` | biblatex author/year |
+| `printbib` | `\printbibliography` |
+| `biblio` | thebibliography environment |
+| `footcite` | `\footcite{}` |
+| `href` | `\href{url}{text}` |
+| `bibitem` | `\bibitem{key}` |
+
+### Common Packages & Utilities
+| Trigger | Description |
+|---------|-------------|
+| `todo` | `\todo{}` (todonotes) |
+| `note` | `\marginpar{}` |
+| `verb` | verbatim environment |
+| `url` | `\url{}` |
+| `email` | `\href{mailto:...}{...}` |
+| `SI` | `\SI{value}{unit}` (siunitx) |
+| `num` | `\num{}` (siunitx) |
+| `deg` | `\ang{}` (siunitx) |
+| `comment` | comment environment |
+| `lipsum` | `\lipsum[n]` placeholder |
 
 ## Advanced Features
 
