@@ -323,4 +323,89 @@ return {
     i(1, "key"),
     i(0, "Author. Title. Year."),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- DOCUMENT STRUCTURE & PREAMBLE
+  -- ══════════════════════════════════════════════════
+
+  -- Full document skeleton
+  s("doc", fmt([[\documentclass[{}]{{{}}}
+
+% Packages
+\usepackage[utf8]{{inputenc}}
+\usepackage[T1]{{fontenc}}
+\usepackage{{amsmath, amssymb, amsthm}}
+\usepackage{{hyperref}}
+
+\title{{{}}}
+\author{{{}}}
+\date{{{}}}
+
+\begin{{document}}
+
+\maketitle
+
+{}
+
+\end{{document}}
+]], {
+    c(1, { t("12pt"), t("11pt"), t("10pt") }),
+    c(2, { t("article"), t("report"), t("book"), t("beamer"), i(nil, "class") }),
+    i(3, "Title"),
+    i(4, "Author"),
+    c(5, { t("\\today"), i(nil, "date") }),
+    i(0),
+  })),
+
+  -- usepackage (with optional options via choice node)
+  s("pkg", c(1, {
+    sn(nil, { t("\\usepackage{"), i(1, "package"), t("}") }),
+    sn(nil, { t("\\usepackage["), i(1, "options"), t("]{"), i(2, "package"), t("}") }),
+  })),
+
+  -- documentclass
+  s("class", fmt("\\documentclass[{}]{{{}}}", {
+    c(1, { t("12pt,a4paper"), t("11pt,a4paper"), t("11pt,letterpaper"), i(nil, "options") }),
+    c(2, { t("article"), t("report"), t("book"), t("beamer"), i(nil, "class") }),
+  })),
+
+  -- title / author / date
+  s("title", fmt("\\title{{{}}}", { i(0, "Title") })),
+  s("author", fmt("\\author{{{}}}", { i(0, "Author") })),
+  s("date", c(1, {
+    sn(nil, { t("\\date{\\today}") }),
+    sn(nil, { t("\\date{"), i(1, "date"), t("}") }),
+  })),
+
+  -- standalone commands
+  s("maketitle", t("\\maketitle")),
+  s("toc", t("\\tableofcontents")),
+
+  -- newcommand / renewcommand
+  s("newcmd", fmt("\\newcommand{{\\{}}}[{}]{{{}}}", {
+    i(1, "name"),
+    i(2, "0"),
+    i(0, "definition"),
+  })),
+  s("renewcmd", fmt("\\renewcommand{{\\{}}}[{}]{{{}}}", {
+    i(1, "name"),
+    i(2, "0"),
+    i(0, "definition"),
+  })),
+
+  -- newenvironment
+  s("newenv", fmt([[\newenvironment{{{}}}
+  {{{}}}
+  {{{}}}
+]], {
+    i(1, "name"),
+    i(2, "begin-code"),
+    i(0, "end-code"),
+  })),
+
+  -- abstract environment
+  s("abstract", fmt([[\begin{{abstract}}
+  {}
+\end{{abstract}}
+]], { i(0) })),
 }
