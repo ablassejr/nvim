@@ -882,4 +882,52 @@ return {
 
   -- Foot citation (biblatex)
   s("footcite", fmt("\\footcite{{{}}}", { i(0) })),
+
+  -- ══════════════════════════════════════════════════
+  -- COMMON PACKAGES & UTILITIES
+  -- ══════════════════════════════════════════════════
+
+  -- TODO marker (requires todonotes package)
+  s("todo", fmt("\\todo{{{}}}", { i(0) })),
+
+  -- Margin note
+  s("note", fmt("\\marginpar{{{}}}", { i(0) })),
+
+  -- Verbatim environment
+  s("verb", fmt([[\begin{{verbatim}}
+{}
+\end{{verbatim}}
+]], { i(0) })),
+
+  -- URL (requires hyperref or url package)
+  s("url", fmt("\\url{{{}}}", { i(0) })),
+
+  -- Email hyperlink
+  s("email", fmt("\\href{{mailto:{}}}{{{}}}", {
+    i(1, "user@example.com"),
+    i(0, "user@example.com"),
+  })),
+
+  -- SI unit value (requires siunitx package)
+  s("SI", fmt("\\SI{{{}}}{{{}}}", {
+    i(1, "1.0"),
+    c(2, { t("\\meter"), t("\\kilogram"), t("\\second"), t("\\kelvin"), t("\\joule"), i(nil, "unit") }),
+  })),
+
+  -- Number (siunitx formatting)
+  s("num", fmt("\\num{{{}}}", { i(0) })),
+
+  -- Angle (siunitx)
+  s("deg", fmt("\\ang{{{}}}", { i(0) })),
+
+  -- Comment environment (requires comment package)
+  s("comment", fmt([[\begin{{comment}}
+{}
+\end{{comment}}
+]], { i(0) })),
+
+  -- Lipsum placeholder text
+  s("lipsum", fmt("\\lipsum[{}]", {
+    c(1, { t("1"), t("1-3"), t("1-5"), i(nil, "n") }),
+  })),
 }
