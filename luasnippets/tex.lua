@@ -846,4 +846,40 @@ return {
     c(2, { t("python"), t("cpp"), t("bash"), t("latex"), i(nil, "lang") }),
     i(0, "% code here"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- BIBLIOGRAPHY & CROSS-REFERENCES — EXTENSIONS
+  -- ══════════════════════════════════════════════════
+
+  -- Equation reference (parenthesized)
+  s("eqref", fmt("\\eqref{{{}}}", { i(0) })),
+
+  -- Hyperref autoref (uses type prefix automatically)
+  s("autoref", fmt("\\autoref{{{}}}", { i(0) })),
+
+  -- Cleveref (requires cleveref package, load after hyperref)
+  s("cref", fmt("\\cref{{{}}}", { i(0) })),
+
+  -- biblatex author/year citations
+  s("citeauthor", fmt("\\citeauthor{{{}}}", { i(0) })),
+  s("citeyear", fmt("\\citeyear{{{}}}", { i(0) })),
+
+  -- Print bibliography (biblatex style, with optional title override)
+  s("printbib", c(1, {
+    sn(nil, { t("\\printbibliography") }),
+    sn(nil, { t("\\printbibliography[title={"), i(1, "References"), t("}]") }),
+  })),
+
+  -- Legacy thebibliography environment
+  s("biblio", fmt([[\begin{{thebibliography}}{{{}}}
+  \bibitem{{{}}} {}
+\end{{thebibliography}}
+]], {
+    i(1, "99"),
+    i(2, "key"),
+    i(0, "Author. Title. Year."),
+  })),
+
+  -- Foot citation (biblatex)
+  s("footcite", fmt("\\footcite{{{}}}", { i(0) })),
 }
