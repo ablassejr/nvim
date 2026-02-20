@@ -408,4 +408,43 @@ return {
   {}
 \end{{abstract}}
 ]], { i(0) })),
+
+  -- ══════════════════════════════════════════════════
+  -- CORE STRUCTURES — EXTENSIONS
+  -- ══════════════════════════════════════════════════
+
+  -- Paragraph heading
+  s("par", fmt("\\paragraph{{{}}}", { i(0) })),
+
+  -- No indent
+  s("noind", t("\\noindent")),
+
+  -- Vertical / horizontal space
+  s("vsp", fmt("\\vspace{{{}}}", {
+    c(1, { t("1em"), t("1cm"), t("\\baselineskip"), i(nil, "length") }),
+  })),
+  s("hsp", fmt("\\hspace{{{}}}", {
+    c(1, { t("1em"), t("1cm"), i(nil, "length") }),
+  })),
+
+  -- New page
+  s("newpage", t("\\newpage")),
+
+  -- Appendix with first section
+  s("appendix", fmt([[\appendix
+\section{{{}}}
+{}
+]], { i(1, "Appendix Title"), i(0) })),
+
+  -- Minipage
+  s("minipage", fmt([[\begin{{minipage}}{{{}\\textwidth}}
+  {}
+\end{{minipage}}
+]], { i(1, "0.5"), i(0) })),
+
+  -- Center environment
+  s("center", fmt([[\begin{{center}}
+  {}
+\end{{center}}
+]], { i(0) })),
 }
