@@ -504,4 +504,39 @@ return {
     i(3, "0"),
     i(0, "\\text{otherwise}"),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- MATH — ENVIRONMENTS (EXTENSIONS)
+  -- ══════════════════════════════════════════════════
+
+  -- Gather (multiple equations, centered, aligned at &)
+  s("gather", fmt([[\begin{{gather}}
+  {} \\
+  {}
+  \label{{eq:{}}}
+\end{{gather}}
+]], { i(1, "equation1"), i(2, "equation2"), i(0, "label") })),
+
+  -- Multline (single long equation split across lines)
+  s("multline", fmt([[\begin{{multline}}
+  {} \\
+  {} \\
+  {}
+\end{{multline}}
+]], { i(1, "line1"), i(2, "line2"), i(0, "line3") })),
+
+  -- Binomial coefficient
+  s("binom", fmt("\\binom{{{}}}{{{}}}", {
+    i(1, "n"),
+    i(0, "k"),
+  })),
+
+  -- Determinant operator
+  s("det", t("\\det")),
+
+  -- Trace operator
+  s("trace", t("\\operatorname{tr}")),
+
+  -- Custom math operator
+  s("opr", fmt("\\operatorname{{{}}}", { i(0) })),
 }
