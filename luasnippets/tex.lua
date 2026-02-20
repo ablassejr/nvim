@@ -634,4 +634,86 @@ return {
     sn(nil, { t("\\usecolortheme{"), i(1, "beaver"), t("}") }),
     sn(nil, { t("\\usefonttheme{"), i(1, "serif"), t("}") }),
   })),
+
+  -- ══════════════════════════════════════════════════
+  -- TIKZ — EXTENSIONS
+  -- ══════════════════════════════════════════════════
+
+  -- Arrow path
+  s("arrow", fmt("\\draw[->, {}] ({}) -- ({});", {
+    c(1, { t("thick"), t("very thick"), t("thin"), i(nil, "style") }),
+    i(2, "0,0"),
+    i(0, "1,0"),
+  })),
+
+  -- Shapes
+  s("circle", fmt("\\draw[{}] ({}) circle ({});", {
+    i(1, ""),
+    i(2, "0,0"),
+    i(0, "1cm"),
+  })),
+  s("rect", fmt("\\draw[{}] ({}) rectangle ({});", {
+    i(1, ""),
+    i(2, "0,0"),
+    i(0, "2,1"),
+  })),
+
+  -- Grid
+  s("grid", fmt("\\draw[step={}, {}] ({}) grid ({});", {
+    i(1, "1"),
+    c(2, { t("gray, very thin"), t("gray!50"), i(nil, "style") }),
+    i(3, "0,0"),
+    i(0, "4,4"),
+  })),
+
+  -- Clip scope
+  s("clip", fmt([[\begin{{scope}}
+  \clip ({}) rectangle ({});
+  {}
+\end{{scope}}
+]], { i(1, "0,0"), i(2, "4,4"), i(0) })),
+
+  -- Foreach loop
+  s("foreach", fmt("\\foreach \\{} in {{{}}} {{{}}}", {
+    i(1, "x"),
+    i(2, "1,...,5"),
+    i(0),
+  })),
+
+  -- Scope with options
+  s("scope", fmt([[\begin{{scope}}[{}]
+  {}
+\end{{scope}}
+]], { i(1, "xshift=2cm"), i(0) })),
+
+  -- Coordinate definition
+  s("coord", fmt("\\coordinate ({}) at ({});", {
+    i(1, "name"),
+    i(0, "0,0"),
+  })),
+
+  -- pgfplots axis (requires pgfplots package)
+  s("axis", fmt([[\begin{{tikzpicture}}
+\begin{{axis}}[
+  xlabel={{{}}},
+  ylabel={{{}}},
+  {}
+]
+  {}
+\end{{axis}}
+\end{{tikzpicture}}
+]], {
+    i(1, "$x$"),
+    i(2, "$y$"),
+    i(3, "grid=major"),
+    i(0, "% \\addplot commands here"),
+  })),
+
+  -- Flowchart node box
+  s("flowbox", fmt("\\node[rectangle, draw, {}] ({}) at ({}) {{{}}};", {
+    c(1, { t("rounded corners"), t("fill=blue!20, rounded corners"), i(nil, "style") }),
+    i(2, "name"),
+    i(3, "0,0"),
+    i(0, "text"),
+  })),
 }
