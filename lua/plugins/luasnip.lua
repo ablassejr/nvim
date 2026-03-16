@@ -59,8 +59,10 @@ return {
     })
 
     -- ── Keymaps ──────────────────────────────────────
-    -- Tab: Expand snippet or jump forward
+    -- Tab: Expand snippet or jump forward (skip in Avante buffers)
     vim.keymap.set({ "i", "s" }, "<Tab>", function()
+      local ft = vim.bo.filetype
+      if ft == "AvanteInput" or ft == "Avante" then return "<Tab>" end
       if ls.expand_or_jumpable() then
         ls.expand_or_jump()
       else
@@ -68,8 +70,10 @@ return {
       end
     end, { expr = true, silent = true })
 
-    -- Shift-Tab: Jump backward
+    -- Shift-Tab: Jump backward (skip in Avante buffers)
     vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+      local ft = vim.bo.filetype
+      if ft == "AvanteInput" or ft == "Avante" then return "<S-Tab>" end
       if ls.jumpable(-1) then
         ls.jump(-1)
       else

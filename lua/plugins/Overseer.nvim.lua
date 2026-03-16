@@ -2,5 +2,7 @@ return {
   "stevearc/overseer.nvim",
   ---@module 'overseer'
   ---@type overseer.SetupOpts
-  opts = {},
+  opts = {
+    dap = false,
+  },
 }

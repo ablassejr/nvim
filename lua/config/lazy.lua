@@ -16,9 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   spec = {
-    { "mason-org/mason.nvim",
-    "stevearc/conform.nvim",
-    "zapling/mason-conform.nvim", },
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
     -- import/override with your plugins

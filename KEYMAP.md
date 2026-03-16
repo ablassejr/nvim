@@ -15,14 +15,17 @@ Custom keymap reference for this Neovim configuration. Only lists keymaps define
 
 ## Which-key Groups (`lua/config/keymaps.lua`)
 
+Custom groups registered in addition to LazyVim defaults (`<leader>b`, `<leader>c`, `<leader>d`, `<leader>f`, `<leader>g`, `<leader>s`, `<leader>u`, `<leader>w`, `<leader>x`, etc.).
+
 | Prefix | Group |
 |--------|-------|
-| `<leader>a` | ai |
 | `<leader>ac` | claude code |
-| `<leader>g` | git |
 | `<leader>k` | sidekick |
 | `<leader>L` | latex |
+| `<leader>M` | multicursors |
+| `<leader>nt` | neovim tips |
 | `<leader>o` | opencode |
+| `<leader>O` | overseer |
 | `<leader>T` | todos |
 
 ## AI / LLM
@@ -65,8 +68,8 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>kn` | n | Next edit suggestion (NES jump/apply) |
-| `<C-S-Space>` | n | Accept NES suggestion |
+| `<Tab>` | n | Next edit suggestion (NES jump/apply) |
+| `<C-]>` | n | Accept NES suggestion |
 | `<leader>kc` | n, v | CLI toggle |
 | `<leader>kt` | n | Select tool |
 | `<leader>ks` | v | Send selection |
@@ -90,19 +93,13 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 
 ## Navigation & Search
 
-### Window Picker (`lua/plugins/window-picker.nvim.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>w` | n | Pick window |
-
 ### Leap (`lua/plugins/leap.nvim.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
 | `s` | n, x, o | Leap (2-char jump) |
 | `S` | n | Leap from window |
-| `f` | n, x, o | Enhanced f (1-char with labels) |
+| `f` | n, x, o | Enhanced f (1-char with clever-f traversal) |
 | `F` | n, x, o | Enhanced F (backward) |
 | `t` | n, x, o | Enhanced t (before char) |
 | `T` | n, x, o | Enhanced T (backward, before) |
@@ -121,11 +118,45 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 | `<leader>fp` | n | Find Plugin File |
 | `<leader>xl` | n | Location List (Telescope) |
 
-### Snippet Browser (`lua/plugins/snippet-browser.lua`)
+### Window Picker (`lua/plugins/window-picker.nvim.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>sL` | n | Search Snippets (LuaSnip via Telescope) |
+| `<leader>wp` | n | Pick window |
+
+### Treesitter Incremental Selection (`lua/plugins/nvim-treesitter.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<CR>` | n, x | Increment selection |
+| `<BS>` | x | Decrement selection |
+
+### NvimLaunch (`lua/plugins/nvimlaunch.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>l` | n | NvimLaunch (overrides LazyVim's `:Lazy`) |
+
+### PDF Reader (`lua/plugins/pdfreader.nvim.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>Fp` | n | PDF Reader: Open recent |
+
+## Windows & Splits
+
+### Focus.nvim (`lua/plugins/focus.nvim.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>wh` | n | Split left |
+| `<leader>wj` | n | Split down |
+| `<leader>wk` | n | Split up |
+| `<leader>wl` | n | Split right |
+| `<leader>wn` | n | Split nicely (golden ratio) |
+| `<leader>we` | n | Equalise splits |
+| `<leader>wm` | n | Maximize / equalise toggle |
+| `<leader>wt` | n | Toggle focus resizing |
 
 ## Git
 
@@ -172,13 +203,28 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>m` | n, v | Create selection (word/visual) |
+| `<leader>m` | n | Create selection for word under cursor |
+| `<leader>m` | v | Start multicursor from visual selection |
+| `<leader>Ms` | n | Start multicursor with a pattern |
+| `<leader>Mc` | n | Clear multicursor selections |
+| `<leader>Mp` | n | Multicursor pattern search |
 
 ### Image Paste (`lua/plugins/img-clip.nvim.lua`)
 
 | Key | Mode | Description |
 |-----|------|-------------|
 | `<leader>p` | n | Paste image from clipboard |
+
+## Snippets (`lua/plugins/luasnip.lua`)
+
+Keymaps set inside LuaSnip's `config()` function (active in insert/select mode).
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<Tab>` | i, s | Expand snippet or jump forward |
+| `<S-Tab>` | i, s | Jump backward |
+| `<C-l>` | i, s | Cycle choice node forward |
+| `<C-h>` | i, s | Cycle choice node backward |
 
 ## LaTeX
 
@@ -188,6 +234,45 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 |-----|------|-------------|
 | `<leader>Lp` | n | Preview LaTeX equation (popup) |
 | `<leader>Lv` | n | Toggle inline virtual text |
+
+## Debugging & Testing
+
+### DAP (`lua/plugins/nvim-dap.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<F5>` | n | Continue |
+| `<F10>` | n | Step Over |
+| `<F11>` | n | Step Into |
+| `<S-F11>` | n | Step Out |
+| `<leader>db` | n | Toggle Breakpoint |
+| `<leader>dq` | n | Terminate |
+
+### DAP View (`lua/plugins/nvim-dap-view.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>du` | n | Toggle DAP View |
+
+### Neotest (`lua/plugins/neotest-jest.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>tt` | n | Run File |
+| `<leader>tT` | n | Run All Test Files |
+| `<leader>tr` | n | Run Nearest |
+| `<leader>td` | n | Debug Nearest |
+
+## Task Runner
+
+### Overseer (`lua/config/keymaps.lua`)
+
+| Key | Mode | Description |
+|-----|------|-------------|
+| `<leader>Oo` | n | Toggle Task List |
+| `<leader>Or` | n | Run Task |
+| `<leader>Oa` | n | Task Action |
+| `<leader>Oq` | n | Quick Action |
 
 ## Todos — Checkmate (`lua/plugins/checkmate.nvim.lua`)
 

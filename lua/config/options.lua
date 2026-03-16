@@ -4,6 +4,11 @@ local env = vim.env
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- Folding
+opt.foldlevel = 99 -- Open all folds by default
+opt.foldlevelstart = 99
+opt.foldenable = true
+
 -- Plugin settings
 vim.g.snacks_animate = false -- Disable snacks.nvim animations
 vim.g.codecompanion_auto_tool_mode = true

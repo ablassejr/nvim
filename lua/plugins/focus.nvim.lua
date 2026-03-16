@@ -51,7 +51,7 @@ return {
       cursorcolumn = false,
       colorcolumn = { enable = false },
       signcolumn = true,
-      winhighlight = true,
+      winhighlight = false,
     },
   },
   config = function(_, opts)

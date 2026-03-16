@@ -4,8 +4,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     -- blink.cmp extension plugins
-    "mikavilpas/blink-ripgrep.nvim", -- Ripgrep search integration
-    "Kaiser-Yang/blink-cmp-git", -- Git completions (issues, PRs, users, commits)
+"Kaiser-Yang/blink-cmp-git", -- Git completions (issues, PRs, users, commits)
     -- Database completion (loaded for SQL filetypes)
     { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
     -- codecompanion.nvim configured in its own file; blink source registered below
@@ -21,21 +20,9 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-    -- Use LuaSnip as snippet engine
-    snippets = {
-      expand = function(snippet)
-        require("luasnip").lsp_expand(snippet)
-      end,
-      active = function(filter)
-        if filter and filter.direction then
-          return require("luasnip").jumpable(filter.direction)
-        end
-        return require("luasnip").in_snippet()
-      end,
-      jump = function(direction)
-        require("luasnip").jump(direction)
-      end,
-    },
+    -- Use LuaSnip preset — prevents LazyVim from overriding expand with
+    -- vim.snippet.expand(), whose parser lacks tabstop transform support
+    snippets = { preset = "luasnip" },
 
     -- See :h blink-cmp-config-keymap for defining your own keymap
     -- Base: 'default' preset (C-n/C-p nav, C-e hide, C-k signature)
@@ -60,7 +47,7 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "copilot", "lsp", "path", "snippets", "buffer", "ripgrep", "dadbod", "git" },
+      default = { "copilot", "lsp", "path", "snippets", "dadbod", "git" },
       per_filetype = {
         codecompanion = { "codecompanion" },
         -- Input boxes: only LSP completions
@@ -105,33 +92,7 @@ return {
           score_offset = 100, -- Prioritize copilot suggestions
           async = true,
         },
-        -- Buffer source (built-in) — completes words from all open buffers
-        buffer = {
-          name = "Buffer",
-          module = "blink.cmp.sources.buffer",
-          enabled = true,
-          score_offset = 700, -- Just under snippets (750)
-          opts = {
-            -- Complete from all open buffers, not just the current one
-            get_bufnrs = vim.api.nvim_list_bufs,
-          },
-          -- Filter out plain dictionary words (short common English words)
-          transform_items = function(_, items)
-            return vim.tbl_filter(function(item)
-              return item.insertText:find("[A-Z_]") -- keep camelCase, snake_case, PascalCase
-                or #item.insertText > 6 -- keep longer identifiers
-                or item.insertText:match("^%u") -- keep capitalized words (types, classes)
-              end, items)
-          end,
-        },
-        -- Ripgrep source configuration
-        ripgrep = {
-          module = "blink-ripgrep",
-          name = "Ripgrep",
-          enabled = true,
-          -- Options documented at: https://github.com/mikavilpas/blink-ripgrep.nvim
-        },
-        -- Database completion source
+-- Database completion source
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
@@ -143,7 +104,7 @@ return {
           module = "blink.cmp.sources.snippets",
           kind = "Snippet",
           enabled = true,
-          score_offset = 1100,
+          score_offset = 1200,
         },
         -- Git source — issues (#), PRs, users (@), commit types (:)
         git = {
@@ -168,7 +129,7 @@ return {
       sources = function()
         local type = vim.fn.getcmdtype()
         if type == "/" or type == "?" then return {} end
-        return { "cmdline", "buffer" }
+        return { "cmdline" }
       end,
     },
   },

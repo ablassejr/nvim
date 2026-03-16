@@ -1,9 +1,7 @@
 return {
-  -- leap.nvim moved from GitHub to Codeberg; override LazyVim extra URL
-  -- and replace deprecated add_default_mappings() with modern <Plug> mappings
+  -- Replace LazyVim extra's deprecated add_default_mappings() with modern <Plug> mappings
   {
-    "ggandor/leap.nvim",
-    url = "https://codeberg.org/andyg/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim.git",
     keys = {
       { "s", "<Plug>(leap)", mode = { "n", "x", "o" }, desc = "Leap" },
       { "S", "<Plug>(leap-from-window)", mode = { "n" }, desc = "Leap from Window" },
@@ -51,6 +49,4 @@ return {
     end,
   },
 
-  -- flit.nvim is deprecated; its f/t functionality is now built into leap.nvim
-  { "ggandor/flit.nvim", enabled = false },
 }

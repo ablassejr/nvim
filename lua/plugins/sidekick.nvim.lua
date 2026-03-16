@@ -104,13 +104,14 @@ return {
   -- stylua: ignore
   keys = {
     {
-      "<leader>kn",
+      "<Tab>",
       function()
         if not require("sidekick").nes_jump_or_apply() then
           vim.notify("No next edit suggestion", vim.log.levels.INFO)
         end
       end,
       desc = "Sidekick next edit",
+      mode = { "n" },
     },
     {
       "<C-]>",

@@ -11,6 +11,6 @@ return {
     disabled_filetypes = {
       ["codecompanion"] = true,
     },
-    enabled = false,
+    enabled = true,
   },
 }

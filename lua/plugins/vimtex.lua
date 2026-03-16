@@ -1,13 +1,20 @@
+local options = require("vim.filetype.options")
 -- Plugin: lervag/vimtex
 -- Installed via store.nvim
 
 return {
-    "lervag/vimtex",
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = function()
-        -- VimTeX configuration goes here, e.g.
-        vim.g.vimtex_view_method = "sioyek"
-        vim.g.vimtex_syntax_enabled = 0
-    end
+  "lervag/vimtex",
+  lazy = false, -- we don't want to lazy load VimTeX
+  -- tag = "v2.15", -- uncomment to pin to a specific release
+  init = function()
+    -- VimTeX configuration goes here, e.g.
+    vim.g.vimtex_view_method = "sioyek"
+    vim.g.vimtex_syntax_enabled = 0
+    vim.g.vimtex_compiler_latexmk =
+      { options = {
+        "-shell-escape",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+      } }
+  end,
 }

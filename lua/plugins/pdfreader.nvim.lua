@@ -21,6 +21,6 @@ return {
         require("pdfreader").setup(opts)
     end,
     keys = {
-        { "<leader>fp", "<cmd>Telescope pdfreader<cr>", desc = "PDF Reader: Open recent" },
+        { "<leader>Fp", "<cmd>Telescope pdfreader<cr>", desc = "PDF Reader: Open recent" },
     },
 }

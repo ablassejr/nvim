@@ -45,7 +45,7 @@ return {
       mode = { "n" },
       "<Leader>Mp",
       "<cmd>MCpattern<cr>",
-      desc = "Start Multicursor with a pattern",
+      desc = "Multicursor pattern search",
     },
   },
 }

@@ -9,16 +9,28 @@ set("n", "<leader>gp", function() Snacks.picker.projects() end, { desc = "Projec
 set("n", "<leader>gr", function() Snacks.picker.github({ state = "open" }) end, { desc = "Open Pull Requests" })
 set("n", "<leader>gR", function() Snacks.picker.github({ state = "all" }) end, { desc = "All Pull Requests" })
 
+-- Buffers
+set("n", "<leader>bf", function() Snacks.picker.buffers() end, { desc = "Find Buffers" })
+set("n", "<leader>bF", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, { desc = "Find Buffers (All)" })
+
+-- Overseer (task runner)
+set("n", "<leader>Oo", "<cmd>OverseerToggle<CR>", { desc = "Toggle Task List" })
+set("n", "<leader>Or", "<cmd>OverseerRun<CR>", { desc = "Run Task" })
+set("n", "<leader>Oa", "<cmd>OverseerTaskAction<CR>", { desc = "Task Action" })
+set("n", "<leader>Oq", "<cmd>OverseerQuickAction<CR>", { desc = "Quick Action" })
+
 -- Which-key group descriptions for custom plugin namespaces
+-- (groups already provided by LazyVim: <leader>a, <leader>g, <leader>d, <leader>t, <leader>w, etc.)
 local ok, wk = pcall(require, "which-key")
 if ok then
   wk.add({
-    { "<leader>a", group = "ai" },
     { "<leader>ac", group = "claude code" },
-    { "<leader>g", group = "git" },
     { "<leader>k", group = "sidekick" },
     { "<leader>L", group = "latex" },
+    { "<leader>M", group = "multicursors" },
+    { "<leader>nt", group = "neovim tips" },
     { "<leader>o", group = "opencode" },
+    { "<leader>O", group = "overseer" },
     { "<leader>T", group = "todos" },
   })
 end
