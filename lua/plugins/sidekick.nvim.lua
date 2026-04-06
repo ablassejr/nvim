@@ -63,7 +63,6 @@ return {
           enabled = false,
         },
         tools = {
-          opencode = { cmd = { "opencode" }, url = "https://github.com/sst/opencode" },
           claude = { cmd = { "claude" }, url = "https://github.com/anthropics/claude-code" },
           codex = { cmd = { "codex", "--search" }, url = "https://github.com/openai/codex" },
           copilot = { cmd = { "copilot", "--banner" }, url = "https://github.com/github/copilot-cli" },
