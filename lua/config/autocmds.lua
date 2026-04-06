@@ -20,6 +20,11 @@
 -- Overriding buftype to "nofile" after Snacks sets it to "prompt" fixes this.
 -- Snacks.input and Snacks.picker.input both have their own CR/Esc keymaps,
 -- so prompt buffer callbacks (prompt_setcallback) aren't needed.
+vim.filetype.add({
+  extension = { nvimlaunch = "json" },
+  filename = { [".nvimlaunch"] = "json" },
+})
+
 local snacks_prompt_fix = vim.api.nvim_create_augroup("snacks_prompt_fix", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
