@@ -5,6 +5,15 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  keys = {
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer.open()
+      end,
+      desc = "Explorer Snacks (tree)",
+    },
+  },
   ---@type snacks.Config
   opts = {
     -- your configuration comes here
@@ -35,7 +44,7 @@ return {
       enabled = true,
     },
     explorer = {
-      enabled = false, -- replaced by neo-tree.nvim
+      enabled = true,
     },
     indent = {
       enabled = true,
@@ -45,6 +54,30 @@ return {
     },
     picker = {
       enabled = true,
+      sources = {
+        explorer = {
+          win = {
+            input = {
+              keys = {
+                ["<CR>"] = {
+                  function(win)
+                    if vim.fn.mode():sub(1, 1) == "i" then
+                      vim.cmd.stopinsert()
+                      vim.schedule(function()
+                        win:execute("confirm")
+                      end)
+                    else
+                      win:execute("confirm")
+                    end
+                  end,
+                  mode = { "n", "i" },
+                  desc = "Confirm",
+                },
+              },
+            },
+          },
+        },
+      },
     },
     notifier = {
       enabled = true,
@@ -60,6 +93,9 @@ return {
     },
     statuscolumn = {
       enabled = true,
+    },
+    terminal = {
+      enabled = false,
     },
     words = {
       enabled = true,

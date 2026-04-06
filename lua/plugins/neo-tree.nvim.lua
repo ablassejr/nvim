@@ -3,6 +3,17 @@
 
 return {
   "nvim-neo-tree/neo-tree.nvim",
+  keys = {
+    { "<leader>e", false },
+    { "<leader>E", false },
+    {
+      "<leader>E",
+      function()
+        require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
+      end,
+      desc = "Explorer NeoTree (cwd)",
+    },
+  },
   opts = {
     close_if_last_window = true,
     enable_git_status = true,
