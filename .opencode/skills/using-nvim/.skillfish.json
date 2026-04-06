@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "using-nvim",
+  "owner": "warrenzhu050413",
+  "repo": "warren-claude-code-plugin-marketplace",
+  "path": "claude-context-orchestrator/snippets/local/documentation/using-nvim",
+  "branch": "main",
+  "sha": "8e069fea6d35743c4c105adb904bacd064fb3401",
+  "source": "manual"
+}
