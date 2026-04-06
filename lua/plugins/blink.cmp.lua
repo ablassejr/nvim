@@ -104,7 +104,7 @@ return {
           module = "blink.cmp.sources.snippets",
           kind = "Snippet",
           enabled = true,
-          score_offset = 1200,
+          score_offset = 0,
         },
         -- Git source — issues (#), PRs, users (@), commit types (:)
         git = {

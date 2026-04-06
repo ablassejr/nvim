@@ -10,6 +10,7 @@ return {
   opts = {
     disabled_filetypes = {
       ["codecompanion"] = true,
+      ["markdown"] = true,
     },
     enabled = true,
   },

@@ -19,19 +19,19 @@ return {
       end
 
       -- Enhanced f/F/t/T: 1-char search with clever-f traversal (replaces flit.nvim)
-      -- Based on official README recipe: autojump in n/o modes, labels in visual mode
       local clever = require("leap.user").with_traversal_keys
       local clever_f = clever("f", "F")
       local clever_t = clever("t", "T")
 
       local function as_ft(key_specific_args)
+        -- In operator-pending mode (d/c/y), use default labels so the user
+        -- can select a specific target. In normal/visual mode, use empty
+        -- labels to force autojump to the first match (clever-f traversal).
+        local is_op = vim.api.nvim_get_mode().mode:match("o")
         local common_args = {
           inputlen = 1,
           inclusive = true,
-          opts = {
-            labels = "", -- force autojump to first match
-            -- safe_labels left as default → labels shown on 2nd+ targets in all modes
-          },
+          opts = is_op and {} or { labels = "" },
         }
         return vim.tbl_deep_extend("keep", common_args, key_specific_args)
       end
