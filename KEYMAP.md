@@ -24,8 +24,7 @@ Custom groups registered in addition to LazyVim defaults (`<leader>b`, `<leader>
 | `<leader>L` | latex |
 | `<leader>M` | multicursors |
 | `<leader>nt` | neovim tips |
-| `<leader>o` | opencode |
-| `<leader>O` | overseer |
+| `<leader>o` | overseer |
 | `<leader>T` | todos |
 
 ## AI / LLM
@@ -76,20 +75,6 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 | `<leader>kp` | n, v | Prompts menu |
 | `<leader>kf` | n, v | Focus CLI window |
 | `<leader>ka` | n, v | Claude CLI toggle |
-
-### OpenCode (`lua/plugins/opencode.nvim.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>ot` | n | Toggle OpenCode |
-| `<leader>oa` | n, v | Ask OpenCode |
-| `<leader>oA` | n, v | Ask about current file |
-| `<leader>on` | n | New session |
-| `<leader>oe` | n | Explain code near cursor |
-| `<leader>or` | n | Review file |
-| `<leader>of` | n | Fix errors (diagnostics) |
-| `<leader>oo` | v | Optimize selection |
-| `<leader>od` | v | Document selection |
 
 ## Navigation & Search
 
@@ -269,10 +254,11 @@ Keymaps set inside LuaSnip's `config()` function (active in insert/select mode).
 
 | Key | Mode | Description |
 |-----|------|-------------|
-| `<leader>Oo` | n | Toggle Task List |
-| `<leader>Or` | n | Run Task |
-| `<leader>Oa` | n | Task Action |
-| `<leader>Oq` | n | Quick Action |
+| `<leader>oo` | n | Toggle Task List |
+| `<leader>or` | n | Run Task |
+| `<leader>oa` | n | Task Action |
+| `<leader>oq` | n | Quick Action |
+| `<leader>os` | n | Shell |
 
 ## Todos — Checkmate (`lua/plugins/checkmate.nvim.lua`)
 

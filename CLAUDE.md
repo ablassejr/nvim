@@ -70,7 +70,7 @@ Plugins gracefully degrade when credentials are missing. Never hardcode tokens.
 
 ### Key Plugin Groups
 
-**AI/LLM**: codecompanion.nvim (Copilot adapter), sidekick.nvim (inline edits), mcphub.nvim (MCP), opencode.nvim
+**AI/LLM**: codecompanion.nvim (Copilot adapter), sidekick.nvim (inline edits), mcphub.nvim (MCP)
 
 **Completion**: blink.cmp with sources: copilot (score_offset=100, prioritized), LSP, ripgrep, dadbod, snippets. Tab accepts ghost text; M-Tab accepts menu item.
 
@@ -83,7 +83,7 @@ Plugins gracefully degrade when credentials are missing. Never hardcode tokens.
 - `<leader>a` = ai (shared namespace — Claude Code under `<leader>ac`, CodeCompanion under `<leader>a{t,a,i,d}`)
 - `<leader>k` = sidekick
 - `<leader>L` = latex
-- `<leader>o` = opencode
+- `<leader>o` = overseer
 - `<leader>T` = todos
 
 ### Custom Keymaps

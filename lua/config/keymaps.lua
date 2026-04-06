@@ -14,10 +14,11 @@ set("n", "<leader>bf", function() Snacks.picker.buffers() end, { desc = "Find Bu
 set("n", "<leader>bF", function() Snacks.picker.buffers({ hidden = true, nofile = true }) end, { desc = "Find Buffers (All)" })
 
 -- Overseer (task runner)
-set("n", "<leader>Oo", "<cmd>OverseerToggle<CR>", { desc = "Toggle Task List" })
-set("n", "<leader>Or", "<cmd>OverseerRun<CR>", { desc = "Run Task" })
-set("n", "<leader>Oa", "<cmd>OverseerTaskAction<CR>", { desc = "Task Action" })
-set("n", "<leader>Oq", "<cmd>OverseerQuickAction<CR>", { desc = "Quick Action" })
+set("n", "<leader>oo", "<cmd>OverseerToggle<CR>", { desc = "Toggle Task List" })
+set("n", "<leader>or", "<cmd>OverseerRun<CR>", { desc = "Run Task" })
+set("n", "<leader>oa", "<cmd>OverseerTaskAction<CR>", { desc = "Task Action" })
+set("n", "<leader>oq", "<cmd>OverseerQuickAction<CR>", { desc = "Quick Action" })
+set("n", "<leader>os", "<cmd>OverseerShell<CR>", { desc = "Shell" })
 
 -- Which-key group descriptions for custom plugin namespaces
 -- (groups already provided by LazyVim: <leader>a, <leader>g, <leader>d, <leader>t, <leader>w, etc.)
@@ -29,8 +30,7 @@ if ok then
     { "<leader>L", group = "latex" },
     { "<leader>M", group = "multicursors" },
     { "<leader>nt", group = "neovim tips" },
-    { "<leader>o", group = "opencode" },
-    { "<leader>O", group = "overseer" },
+    { "<leader>o", group = "overseer" },
     { "<leader>T", group = "todos" },
   })
 end
