@@ -12,6 +12,6 @@ return {
       ["codecompanion"] = true,
       ["markdown"] = true,
     },
-    enabled = true,
+    enabled = false,
   },
 }
