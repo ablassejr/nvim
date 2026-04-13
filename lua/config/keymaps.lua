@@ -31,6 +31,7 @@ if ok then
     { "<leader>M", group = "multicursors" },
     { "<leader>nt", group = "neovim tips" },
     { "<leader>o", group = "overseer" },
+    { "<leader>D", group = "database" },
     { "<leader>T", group = "todos" },
   })
 end
