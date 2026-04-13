@@ -1,12 +1,27 @@
 return {
   "Mofiqul/vscode.nvim",
-  config = function()
-    require("vscode").setup({
-      style = "dark", -- Options: 'dark' or 'light'
-      transparent = true,
-      italic_comments = true,
-      disable_nvimtree_bg = true,
-    })
-    vim.cmd.colorscheme("vscode")
-  end,
+  lazy = true,
+  opts = {
+    style = "dark",
+    transparent = true,
+    italic_comments = true,
+    underline_links = true,
+    disable_nvimtree_bg = true,
+    group_overrides = {
+      Comment = { fg = "#FFFFFF", italic = true },
+      IlluminatedWordText = { bg = "#3a3a3a", underline = true },
+      IlluminatedWordRead = { bg = "#3a3a3a", underline = true },
+      IlluminatedWordWrite = { bg = "#3a3a3a", underline = true },
+      ["@lsp.type.class"] = { link = "Type" },
+      ["@lsp.type.decorator"] = { link = "Function" },
+      ["@lsp.type.enum"] = { link = "Type" },
+      ["@lsp.type.enumMember"] = { link = "Constant" },
+      ["@lsp.type.interface"] = { link = "Type" },
+      ["@lsp.type.namespace"] = { link = "Include" },
+      ["@lsp.type.parameter"] = { link = "@parameter" },
+      ["@lsp.type.property"] = { link = "@property" },
+      ["@lsp.type.variable"] = { link = "@variable" },
+      ["@lsp.mod.deprecated"] = { strikethrough = true },
+    },
+  },
 }

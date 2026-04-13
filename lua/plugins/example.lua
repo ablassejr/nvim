@@ -13,13 +13,7 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   { "scottmckendry/cyberdream.nvim" },
 
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "slate",
-    },
-  },
-
+  
   -- change trouble config
   {
     "folke/trouble.nvim",
