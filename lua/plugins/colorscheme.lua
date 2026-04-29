@@ -33,7 +33,6 @@ return {
         },
         neogit = true,
         neotest = true,
-        neotree = true,
         noice = true,
         notify = true,
         overseer = true,

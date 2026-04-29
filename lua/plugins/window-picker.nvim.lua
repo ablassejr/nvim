@@ -11,7 +11,7 @@ return {
       filter_rules = {
         autoignore_current = true,
         autoignore_buftype = { "nofile", "quickfix", "terminal" },
-        autoignore_filetype = { "NvimTree", "neo-tree", "notify" },
+        autoignore_filetype = { "NvimTree", "notify" },
         bo = {
           filetype = { "notify", "Trouble", "qf", "spectre_panel" },
           buftype = { "terminal", "quickfix" },

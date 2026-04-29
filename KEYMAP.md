@@ -41,7 +41,7 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 | `<leader>acC` | n, v | Continue Claude |
 | `<leader>acb` | n, v | Add current buffer |
 | `<leader>acs` | v | Send selection to Claude |
-| `<leader>acs` | (file tree) | Add file (NvimTree/neo-tree/oil) |
+| `<leader>acs` | (file tree) | Add file (NvimTree/oil) |
 | `<leader>aca` | n, v | Accept diff |
 | `<leader>acd` | n, v | Deny diff |
 

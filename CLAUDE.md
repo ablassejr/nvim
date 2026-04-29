@@ -74,7 +74,7 @@ Plugins gracefully degrade when credentials are missing. Never hardcode tokens.
 
 **Completion**: blink.cmp with sources: copilot (score_offset=100, prioritized), LSP, ripgrep, dadbod, snippets. Tab accepts ghost text; M-Tab accepts menu item.
 
-**File Explorer**: neo-tree.nvim (`<leader>e` toggle, `<leader>E` reveal)
+**File Explorer**: snacks.nvim explorer (`<leader>e` toggle)
 
 **Navigation**: telescope.nvim (fzf-native), snacks.nvim (picker, dashboard), leap.nvim
 

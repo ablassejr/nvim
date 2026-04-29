@@ -63,7 +63,7 @@ return {
 
     vim.api.nvim_create_autocmd("FileType", {
       group = augroup,
-      pattern = { "neo-tree", "snacks_explorer" },
+      pattern = { "snacks_explorer" },
       callback = function()
         vim.b.focus_disable = true
       end,

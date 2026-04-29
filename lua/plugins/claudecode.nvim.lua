@@ -11,7 +11,7 @@ return {
     { "<leader>aC", false },
     { "<leader>ab", false },
     { "<leader>as", false, mode = "v" },
-    { "<leader>as", false, ft = { "NvimTree", "neo-tree", "oil" } },
+    { "<leader>as", false, ft = { "NvimTree", "oil" } },
     { "<leader>aa", false },
     { "<leader>ad", false },
 
@@ -27,7 +27,7 @@ return {
       "<leader>acs",
       "<cmd>ClaudeCodeTreeAdd<cr>",
       desc = "Add file",
-      ft = { "NvimTree", "neo-tree", "oil" },
+      ft = { "NvimTree", "oil" },
     },
     { "<leader>aca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
     { "<leader>acd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
