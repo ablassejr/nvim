@@ -18,9 +18,15 @@ return {
     "nvimtools/none-ls.nvim",
     optional = true,
     opts = function(_, opts)
-      opts.sources = vim.tbl_filter(function(source)
-        return not source or source.name ~= "markdownlint_cli2"
-      end, opts.sources or {})
+      opts.sources = opts.sources or {}
+      local filtered = {}
+      for _, source in ipairs(opts.sources) do
+        local name = type(source) == "table" and (source.name or (source._opts and source._opts.command)) or nil
+        if name ~= "markdownlint-cli2" and name ~= "markdownlint_cli2" then
+          table.insert(filtered, source)
+        end
+      end
+      opts.sources = filtered
     end,
   },
   {

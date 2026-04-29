@@ -2,15 +2,27 @@
 -- LSP symbol navigation (replaces LazyVim's default <leader>ss Goto Symbol)
 
 return {
-  "bassamsdata/namu.nvim",
-  opts = {
-    global = {},
-    namu_symbols = {
-      options = {},
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        ["*"] = {
+          keys = {
+            { "<leader>ss", "<cmd>Namu symbols<cr>", desc = "Namu Symbols" },
+            { "<leader>sS", "<cmd>Namu workspace<cr>", desc = "Namu Workspace Symbols" },
+          },
+        },
+      },
     },
   },
-  keys = {
-    { "<leader>ss", "<cmd>Namu symbols<cr>", desc = "Jump to LSP symbol", silent = true },
-    { "<leader>sS", "<cmd>Namu workspace<cr>", desc = "LSP Symbols - Workspace", silent = true },
+  {
+    "bassamsdata/namu.nvim",
+    cmd = "Namu",
+    opts = {
+      global = {},
+      namu_symbols = {
+        options = {},
+      },
+    },
   },
 }

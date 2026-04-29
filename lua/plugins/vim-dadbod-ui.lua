@@ -9,7 +9,7 @@ return {
   },
   cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
   keys = {
-    { "<leader>D", "<cmd>DBUIToggle<CR>", desc = "Toggle DBUI" },
+    { "<leader>D", "<cmd>tabnew | DBUIToggle<CR>", desc = "Toggle DBUI" },
     { "<leader>Da", "<cmd>DBUIAddConnection<CR>", desc = "Add DB Connection" },
     { "<leader>Df", "<cmd>DBUIFindBuffer<CR>", desc = "Find DB Buffer" },
   },

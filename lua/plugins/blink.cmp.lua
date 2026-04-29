@@ -89,7 +89,7 @@ return {
         copilot = {
           name = "copilot",
           module = "blink-copilot",
-          score_offset = 100, -- Prioritize copilot suggestions
+          score_offset = -100, -- Deprioritize copilot suggestions below other sources
           async = true,
         },
 -- Database completion source
