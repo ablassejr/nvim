@@ -1,6 +1,17 @@
 -- Plugin: folke/snacks.nvim
 -- Installed via store.nvim
 
+local function safe_cwd()
+  local cwd = vim.uv.cwd()
+  if cwd and vim.fn.isdirectory(cwd) == 1 then
+    return cwd
+  end
+
+  local fallback = vim.env.HOME or vim.fn.expand("~")
+  pcall(vim.cmd, "cd " .. vim.fn.fnameescape(fallback))
+  return fallback
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -9,7 +20,7 @@ return {
     {
       "<leader>e",
       function()
-        Snacks.explorer.open()
+        Snacks.explorer.open({ cwd = safe_cwd() })
       end,
       desc = "Explorer Snacks (tree)",
     },

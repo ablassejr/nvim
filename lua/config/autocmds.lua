@@ -25,6 +25,28 @@ vim.filetype.add({
   filename = { [".nvimlaunch"] = "json" },
 })
 
+local cwd_guard = vim.api.nvim_create_augroup("deleted_cwd_guard", { clear = true })
+
+local function ensure_valid_cwd()
+  local cwd = vim.uv.cwd()
+  if cwd and vim.fn.isdirectory(cwd) == 1 then
+    return
+  end
+
+  local fallback = vim.env.HOME or vim.fn.expand("~")
+  pcall(vim.cmd, "cd " .. vim.fn.fnameescape(fallback))
+end
+
+ensure_valid_cwd()
+
+vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained", "BufEnter", "WinEnter", "DirChanged" }, {
+  group = cwd_guard,
+  callback = function()
+    vim.schedule(ensure_valid_cwd)
+  end,
+  desc = "Recover from deleted current working directories",
+})
+
 local snacks_prompt_fix = vim.api.nvim_create_augroup("snacks_prompt_fix", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
