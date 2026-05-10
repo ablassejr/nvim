@@ -24,12 +24,14 @@ return {
       local clever_t = clever("t", "T")
 
       local function as_ft(key_specific_args)
-        -- Force autojump to the first match. Leap still labels the remaining
-        -- safe targets, so operator-pending commands can refine after landing.
+        -- In operator-pending mode (d/c/y), use default labels so the user
+        -- can select a specific target. In normal/visual mode, use empty
+        -- labels to force autojump to the first match (clever-f traversal).
+        local is_op = vim.api.nvim_get_mode().mode:match("o")
         local common_args = {
           inputlen = 1,
           inclusive = true,
-          opts = { labels = "" },
+          opts = is_op and {} or { labels = "" },
         }
         return vim.tbl_deep_extend("keep", common_args, key_specific_args)
       end
@@ -46,4 +48,5 @@ return {
       end
     end,
   },
+
 }
