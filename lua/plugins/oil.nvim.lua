@@ -6,7 +6,17 @@ return {
   lazy = false,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   keys = {
-    { "<leader>e", "<cmd>Oil<cr>", desc = "Open Oil (parent directory)" },
+    {
+      "<leader>E",
+      function()
+        if vim.bo.filetype == "oil" then
+          require("oil").close()
+        else
+          require("oil").open()
+        end
+      end,
+      desc = "Toggle Oil (buffer)",
+    },
   },
   ---@module 'oil'
   ---@type oil.SetupOpts

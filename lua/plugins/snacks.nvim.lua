@@ -6,13 +6,11 @@ return {
   priority = 1000,
   lazy = false,
   keys = {
-    {
-      "<leader>E",
-      function()
-        Snacks.explorer.open()
-      end,
-      desc = "Explorer Snacks (tree)",
-    },
+    -- Explorer module is disabled below; unmap the keys LazyVim's
+    -- editor.snacks_explorer extra registers so they don't call a dead module.
+    { "<leader>E", false },
+    { "<leader>fE", false },
+    { "<leader>fe", false },
   },
   ---@type snacks.Config
   opts = {
@@ -44,7 +42,7 @@ return {
       enabled = true,
     },
     explorer = {
-      enabled = true,
+      enabled = false,
       replace_netrw = false,
     },
     indent = {
