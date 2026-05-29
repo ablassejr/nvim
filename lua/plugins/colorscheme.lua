@@ -1,3 +1,18 @@
+local function apply_evening_cursor()
+  local cursor = { fg = "#000000", bg = "#ff0000", ctermfg = 16, ctermbg = 196 }
+
+  for _, group in ipairs({ "Cursor", "lCursor", "CursorIM", "TermCursor" }) do
+    vim.api.nvim_set_hl(0, group, cursor)
+  end
+
+  vim.opt.guicursor = table.concat({
+    "n-v-c-sm:block-Cursor",
+    "i-ci-ve:ver25-Cursor",
+    "r-cr-o:hor20-Cursor",
+    "t:block-TermCursor",
+  }, ",")
+end
+
 return {
   {
     "catppuccin/nvim",
@@ -45,8 +60,20 @@ return {
   },
   {
     "LazyVim/LazyVim",
+    init = function()
+      local group = vim.api.nvim_create_augroup("evening_cursor_contrast", { clear = true })
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = group,
+        pattern = "evening",
+        callback = apply_evening_cursor,
+      })
+    end,
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = function()
+        vim.cmd.colorscheme("evening")
+        apply_evening_cursor()
+      end,
     },
   },
 }
