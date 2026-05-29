@@ -19,6 +19,10 @@ local function init_or_grow()
   local mode = vim.fn.mode()
 
   if mode == "n" then
+    if vim.bo[buf].filetype == "norg" then
+      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Plug>(neorg.esupports.hop.hop-link)", true, false, true), "m", false)
+      return
+    end
     local ok, node = pcall(vim.treesitter.get_node)
     if not ok or not node then
       vim.cmd("normal! j")
@@ -50,6 +54,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     init = function()
+      vim.treesitter.language.register("starlark", "tiltfile")
       vim.api.nvim_create_autocmd("BufReadPost", {
         callback = function()
           local buf = vim.api.nvim_get_current_buf()
@@ -73,6 +78,7 @@ return {
         "python",
         "query",
         "regex",
+        "starlark",
         "tsx",
         "typescript",
         "vim",
