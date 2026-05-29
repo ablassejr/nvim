@@ -10,3 +10,19 @@ data
 .DS_Store
 **/.DS_Store
 cs
+
+.nx/polygraph
+.claude/worktrees
+.claude/settings.local.json
+
+# AI/editor tooling scratch + state
+.agents/
+.codex/
+.cursor/
+.memsearch/
+.repowise/
+.opencode/agents/
+.opencode/commands/
+.opencode/skills/
+.nvimlog
+opencode.json
