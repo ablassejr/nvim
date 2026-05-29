@@ -1,26 +1,15 @@
 -- Plugin: folke/snacks.nvim
 -- Installed via store.nvim
 
-local function safe_cwd()
-  local cwd = vim.uv.cwd()
-  if cwd and vim.fn.isdirectory(cwd) == 1 then
-    return cwd
-  end
-
-  local fallback = vim.env.HOME or vim.fn.expand("~")
-  pcall(vim.cmd, "cd " .. vim.fn.fnameescape(fallback))
-  return fallback
-end
-
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   keys = {
     {
-      "<leader>e",
+      "<leader>E",
       function()
-        Snacks.explorer.open({ cwd = safe_cwd() })
+        Snacks.explorer.open()
       end,
       desc = "Explorer Snacks (tree)",
     },
@@ -38,7 +27,7 @@ return {
           local data = vim.fn.stdpath("data")
           local root = data .. "/snacks/todo"
           vim.fn.mkdir(root, "p")
-          local file = root .. "/todo.md" -- IMPORTANT: must match checkmate `files` pattern
+          local file = root .. "/todo.md"
 
           ---@diagnostic disable-next-line: missing-fields
           Snacks.scratch.open({
@@ -56,6 +45,7 @@ return {
     },
     explorer = {
       enabled = true,
+      replace_netrw = false,
     },
     indent = {
       enabled = true,
