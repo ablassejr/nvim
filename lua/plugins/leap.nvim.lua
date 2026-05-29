@@ -1,7 +1,9 @@
 return {
   -- Replace LazyVim extra's deprecated add_default_mappings() with modern <Plug> mappings
   {
-    url = "https://codeberg.org/andyg/leap.nvim.git",
+    -- leap.nvim moved to Codeberg; this matches LazyVim's editor.leap extra.
+    -- (Set explicitly so the spec is self-documenting and survives extra changes.)
+    url = "https://codeberg.org/andyg/leap.nvim",
     keys = {
       { "s", "<Plug>(leap)", mode = { "n", "x", "o" }, desc = "Leap" },
       { "S", "<Plug>(leap-from-window)", mode = { "n" }, desc = "Leap from Window" },
@@ -48,5 +50,4 @@ return {
       end
     end,
   },
-
 }

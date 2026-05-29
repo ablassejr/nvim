@@ -13,7 +13,7 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   { "scottmckendry/cyberdream.nvim" },
 
-  
+
   -- change trouble config
   {
     "folke/trouble.nvim",
