@@ -57,17 +57,29 @@ return {
   config = function(_, opts)
     require("focus").setup(opts)
 
-    -- Disable focus resizing only for file explorer windows.
+    -- Disable focus resizing for Snacks-managed special windows.
     -- focus.nvim uses vim.b.focus_disable (per-buffer) set via autocmd.
     local augroup = vim.api.nvim_create_augroup("FocusDisable", { clear = true })
 
     vim.api.nvim_create_autocmd("FileType", {
       group = augroup,
-      pattern = { "snacks_explorer" },
+      pattern = { "snacks_explorer", "snacks_input", "snacks_picker*" },
       callback = function()
         vim.b.focus_disable = true
+        vim.w.focus_disable = true
       end,
-      desc = "Disable focus autoresize for file explorer",
+      desc = "Disable focus autoresize for Snacks windows",
+    })
+
+    vim.api.nvim_create_autocmd("WinEnter", {
+      group = augroup,
+      callback = function()
+        local ft = vim.bo.filetype
+        if ft:match("^snacks_") then
+          vim.w.focus_disable = true
+        end
+      end,
+      desc = "Disable focus autoresize for Snacks windows on enter",
     })
   end,
 }
