@@ -11,6 +11,10 @@ return {
                 "Maestro/**/*.yaml",
                 "maestro/**/*.yaml",
               },
+              ["https://raw.githubusercontent.com/okteto/okteto/master/schema.json"] = {
+                "okteto.yml",
+                "okteto.yaml",
+              },
             },
           },
         },
