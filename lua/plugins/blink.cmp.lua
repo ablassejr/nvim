@@ -4,7 +4,7 @@ return {
   dependencies = {
     "rafamadriz/friendly-snippets",
     -- blink.cmp extension plugins
-"Kaiser-Yang/blink-cmp-git", -- Git completions (issues, PRs, users, commits)
+    "Kaiser-Yang/blink-cmp-git", -- Git completions (issues, PRs, users, commits)
     -- Database completion (loaded for SQL filetypes)
     { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" } },
     -- codecompanion.nvim configured in its own file; blink source registered below
@@ -47,8 +47,11 @@ return {
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
-      default = { "copilot", "lsp", "path", "snippets", "dadbod", "git" },
+      default = { "copilot", "lsp", "path", "snippets", "git" },
       per_filetype = {
+        sql = { inherit_defaults = true, "dadbod" },
+        mysql = { inherit_defaults = true, "dadbod" },
+        plsql = { inherit_defaults = true, "dadbod" },
         codecompanion = { "codecompanion" },
         -- Input boxes: only LSP completions
         snacks_picker_input = { "lsp" },
@@ -92,12 +95,10 @@ return {
           score_offset = -100, -- Deprioritize copilot suggestions below other sources
           async = true,
         },
--- Database completion source
+        -- Database completion source
         dadbod = {
           name = "Dadbod",
           module = "vim_dadbod_completion.blink",
-          enabled = true,
-          score_offset = 500,
         },
         snippets = {
           name = "Snippets",
@@ -128,7 +129,9 @@ return {
     cmdline = {
       sources = function()
         local type = vim.fn.getcmdtype()
-        if type == "/" or type == "?" then return {} end
+        if type == "/" or type == "?" then
+          return {}
+        end
         return { "cmdline" }
       end,
     },

@@ -64,6 +64,20 @@ class {}({}):
   })),
 
   -- ══════════════════════════════════════════════════
+  -- BOILERPLATE
+  -- ══════════════════════════════════════════════════
+
+  -- CmnLib logging setup
+  s("cmnlog", t({
+    "import logging",
+    "from CmnLib import CmnLib",
+    "",
+    "# Configure logging",
+    "logging.basicConfig(level=CmnLib.getLoggingLevel())",
+    "logger = logging.getLogger()",
+  })),
+
+  -- ══════════════════════════════════════════════════
   -- FASTAPI
   -- ══════════════════════════════════════════════════
 

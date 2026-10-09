@@ -4,6 +4,18 @@
 return {
   "neovim/nvim-lspconfig",
   opts = {
+    servers = {
+      ["*"] = {
+        -- Bound graceful shutdown for any remaining slow-closing server.
+        exit_timeout = 500,
+      },
+      -- Mason auto-enables every installed LSP by default. Keep LTeX disabled
+      -- even if its package is restored later; it should not attach to commit
+      -- messages or other short-lived editor buffers.
+      ltex_plus = {
+        enabled = false,
+      },
+    },
     codelens = {
       enabled = true,
     },

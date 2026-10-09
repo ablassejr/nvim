@@ -46,4 +46,20 @@ return {
       end, opts.ensure_installed or {})
     end,
   },
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown", "mermaid" },
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+    init = function()
+      vim.g.mkdp_command_for_global = 1
+      vim.g.mkdp_filetypes = { "markdown", "mermaid" }
+    end,
+    config = function()
+      vim.cmd([[doautocmd <nomodeline> BufEnter]])
+      vim.cmd([[do FileType]])
+    end,
+  },
 }

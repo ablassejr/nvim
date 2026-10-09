@@ -24,7 +24,6 @@ Custom groups registered in addition to LazyVim defaults (`<leader>b`, `<leader>
 | `<leader>L` | latex |
 | `<leader>M` | multicursors |
 | `<leader>nt` | neovim tips |
-| `<leader>o` | overseer |
 | `<leader>T` | todos |
 
 ## AI / LLM
@@ -121,12 +120,6 @@ Remapped from LazyVim's default `<leader>a*` to `<leader>ac*` to share the `<lea
 | Key | Mode | Description |
 |-----|------|-------------|
 | `<leader>l` | n | NvimLaunch (overrides LazyVim's `:Lazy`) |
-
-### PDF Reader (`lua/plugins/pdfreader.nvim.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>Fp` | n | PDF Reader: Open recent |
 
 ## Windows & Splits
 
@@ -247,18 +240,6 @@ Keymaps set inside LuaSnip's `config()` function (active in insert/select mode).
 | `<leader>tT` | n | Run All Test Files |
 | `<leader>tr` | n | Run Nearest |
 | `<leader>td` | n | Debug Nearest |
-
-## Task Runner
-
-### Overseer (`lua/config/keymaps.lua`)
-
-| Key | Mode | Description |
-|-----|------|-------------|
-| `<leader>oo` | n | Toggle Task List |
-| `<leader>or` | n | Run Task |
-| `<leader>oa` | n | Task Action |
-| `<leader>oq` | n | Quick Action |
-| `<leader>os` | n | Shell |
 
 ## Todos — Checkmate (`lua/plugins/checkmate.nvim.lua`)
 

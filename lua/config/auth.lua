@@ -62,7 +62,6 @@ M.credentials = {
 
   -- Database
   DATABASE_URL = { service = "Default Database", required_for = { "dadbod" } },
-  DBUI_URL = { service = "DadbodUI Database", required_for = { "dadbod-ui" } },
 }
 
 return M

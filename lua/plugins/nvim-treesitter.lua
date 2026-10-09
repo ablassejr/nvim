@@ -50,6 +50,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     init = function()
+      vim.treesitter.language.register("starlark", "tiltfile")
       vim.api.nvim_create_autocmd("BufReadPost", {
         callback = function()
           local buf = vim.api.nvim_get_current_buf()
@@ -73,6 +74,7 @@ return {
         "python",
         "query",
         "regex",
+        "starlark",
         "tsx",
         "typescript",
         "vim",

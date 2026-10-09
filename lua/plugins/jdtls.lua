@@ -6,6 +6,9 @@ return {
     opts = {
       jdtls = {
         cmd_env = { JAVA_HOME = java_home, PATH = java_home .. "/bin:" .. vim.env.PATH },
+        -- Started via vim.lsp.start, so the lsp-diagnostics ["*"] wildcard
+        -- doesn't apply; JVM shutdown is slow enough to hang :qa without this.
+        exit_timeout = 200,
         settings = {
           java = {
             codeGeneration = {

@@ -1,6 +1,5 @@
 -- Plugin: 3rd/image.nvim
 -- Renders inline images in Neovim via Kitty graphics protocol.
--- Required by Neorg's core.latex.renderer module.
 --
 -- NOTE: Uses `cond` to skip loading in headless mode. image.nvim calls
 -- ioctl(TIOCGWINSZ) at require-time which crashes when stdout isn't a tty.
@@ -26,10 +25,6 @@ return {
         download_remote_images = true,
         only_render_image_at_cursor = false,
         filetypes = { "markdown", "vimwiki" },
-      },
-      neorg = {
-        enabled = true,
-        filetypes = { "norg" },
       },
     },
     max_height_window_percentage = 50,

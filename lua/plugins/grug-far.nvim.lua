@@ -6,6 +6,9 @@ return {
       minSearchChars = 2,
       maxSearchMatches = 2000,
       maxLineLength = 1000,
+      prefills = {
+        flags = "--multiline",
+      },
       engines = {
         ripgrep = {
           showReplaceDiff = true,

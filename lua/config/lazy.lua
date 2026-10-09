@@ -14,6 +14,30 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- lazy.nvim stops subprocess timeout timers after Git commands finish, but it
+-- does not close them. A background update check can therefore leave one
+-- libuv handle behind per plugin and make Neovim spin in loop_close on exit.
+-- Close each guard as soon as its subprocess coroutine completes. Keeping the
+-- patch here also covers explicit :Lazy check/sync runs.
+local lazy_process = require("lazy.manage.process")
+if not lazy_process.exit_hang_guard then
+  local spawn = lazy_process.spawn
+
+  lazy_process.spawn = function(...)
+    local task = spawn(...)
+    task:on("done", function()
+      local timeout = task.timeout
+      if timeout and not timeout:is_closing() then
+        timeout:close()
+      end
+      task.timeout = nil
+    end)
+    return task
+  end
+
+  lazy_process.exit_hang_guard = true
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -32,9 +56,11 @@ require("lazy").setup({
   },
   install = { colorscheme = { "slate", "tokyonight", "habamax", "cyberdream" } },
   checker = {
-    enabled = true, -- check for plugin updates periodically
+    -- Avoid spawning a Git process for every plugin in ordinary editor
+    -- sessions. Updates remain available explicitly through :Lazy check/sync.
+    enabled = false,
     notify = false, -- notify on update
-  }, -- automatically check for plugin updates
+  },
   performance = {
     rtp = {
       -- disable some rtp plugins

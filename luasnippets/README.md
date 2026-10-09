@@ -19,6 +19,11 @@ Comprehensive LuaSnip snippet collection for Python, JavaScript, C++, and LaTeX.
 | `fn` | Function with sync/async choice |
 | `cls` | Class definition |
 
+### Boilerplate
+| Trigger | Description |
+|---------|-------------|
+| `cmnlog` | CmnLib logging setup |
+
 ### FastAPI
 | Trigger | Description |
 |---------|-------------|
